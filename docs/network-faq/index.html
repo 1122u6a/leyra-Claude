@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="no-referrer" name="referrer"/><title>网络常见问题 · 文档库 · Leyra</title><meta content="用 AI Network 配网络时最常碰到的问题:分组怎么选、系统代理和 TUN、查 IP 对不上、被插件拦住、换 IP 等。" name="description"/><link href="./" rel="canonical"/><meta content="article" property="og:type"/><meta content="AI Network" property="og:site_name"/><meta content="网络常见问题 · 文档库 · AI Network" property="og:title"/><meta content="用 AI Network 配网络时最常碰到的问题:分组怎么选、系统代理和 TUN、查 IP 对不上、被插件拦住、换 IP 等。" property="og:description"/><meta content="https://client-api.leyra.xin/docs/network-faq" property="og:url"/><meta content="https://client-api.leyra.xin/assets/leyra-orange-104.jpeg" property="og:image"/><meta content="summary" name="twitter:card"/><style>
+:root{--ink:#101A19;--sub:#33413D;--mute:#6B7772;--line:#DDE3E0;--bg:#F3F5F4;--brand:#0B6B5C;--tint:#DCEFEA}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font-family:'IBM Plex Sans','Microsoft YaHei','PingFang SC',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75}
+a{color:var(--brand)}
+header{position:sticky;top:0;z-index:5;background:rgba(243,245,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .in{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--ink);text-decoration:none}
+nav{display:flex;gap:22px;align-items:center;font-size:14.5px}
+nav a{color:var(--sub);text-decoration:none}
+nav a:hover,nav a.on{color:var(--brand)}
+nav a.on{font-weight:600}
+nav .btn{color:#fff;padding:8px 16px;font-size:14px}
+.btn{display:inline-block;border-radius:12px;background:var(--brand);color:#fff;font-weight:600;text-decoration:none}
+.btn:hover{background:#08493F;color:#fff}
+.layout{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:280px minmax(0,1fr) 230px;gap:0;align-items:start}
+.side{position:sticky;top:60px;max-height:calc(100vh - 60px);overflow-y:auto;padding:24px 14px 40px 20px;border-right:1px solid var(--line);font-size:14.5px}
+.side details{margin:0}
+.side summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;font-weight:600;color:var(--ink)}
+.side summary::-webkit-details-marker{display:none}
+.side summary::before{content:"";width:6px;height:6px;border-right:1.6px solid var(--mute);border-bottom:1.6px solid var(--mute);transform:rotate(45deg);margin:0 4px 3px 2px;flex:none;transition:transform .15s}
+.side details:not([open])>summary::before{transform:rotate(-45deg);margin-bottom:0}
+.side .sub>summary{font-weight:500;color:var(--mute);font-size:14px}
+.side .kids{margin-left:12px;padding-left:8px;border-left:1px solid var(--line)}
+.side a{display:block;padding:7px 12px;border-radius:8px;color:var(--sub);text-decoration:none;line-height:1.5}
+.side a:hover{background:#E9EFEC}
+.side a.cur{background:#fff;color:var(--brand);font-weight:600;box-shadow:0 1px 0 var(--line)}
+.main{padding:32px 48px 72px;min-width:0}
+.crumb{font-size:13.5px;color:var(--mute);margin-bottom:18px}
+.crumb a{color:var(--mute);text-decoration:none}
+.crumb a:hover{color:var(--brand)}
+.crumb i{font-style:normal;margin:0 6px}
+.doc{max-width:780px}
+.doc h1{margin:0 0 6px;font-size:34px;line-height:1.3;letter-spacing:-.3px}
+.meta{margin:0 0 28px;font-size:13px;color:var(--mute)}
+.doc h2{margin:44px 0 12px;font-size:26px;line-height:1.35}
+.doc h3{margin:32px 0 10px;font-size:20px}
+.doc h4,.doc h5{margin:22px 0 8px;font-size:16.5px}
+.doc p,.doc li{font-size:16px;color:#26332F}
+.doc p{margin:0 0 16px}
+.doc ul,.doc ol{margin:0 0 16px;padding-left:24px}
+.doc li{margin-bottom:5px}
+.doc img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--line)}
+.doc blockquote{margin:0 0 18px;padding:6px 18px;border-left:4px solid #D9822B;background:#F7F1E8;border-radius:0 10px 10px 0}
+.doc blockquote p{margin:8px 0;color:#4F4636}
+.doc hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+code{font-family:'IBM Plex Mono',Consolas,monospace;font-size:.9em;background:#E8EEEB;border-radius:6px;padding:1px 6px}
+pre{margin:0 0 18px;padding:14px 16px;background:#0F1A18;color:#E6F2EE;border-radius:12px;overflow-x:auto;line-height:1.6}
+pre code{background:none;padding:0;color:inherit;font-size:13.5px}
+.pn{display:flex;justify-content:space-between;gap:16px;margin-top:48px;padding-top:22px;border-top:1px solid var(--line)}
+.pn a{display:block;max-width:48%;padding:12px 16px;border:1px solid var(--line);background:#fff;border-radius:12px;text-decoration:none;color:var(--ink)}
+.pn a:hover{border-color:var(--brand)}
+.pn small{display:block;color:var(--mute);font-size:12.5px}
+.pn .next{margin-left:auto;text-align:right}
+.toc{position:sticky;top:60px;padding:28px 16px 40px 8px;font-size:13.5px;max-height:calc(100vh - 60px);overflow-y:auto}
+.toc b{display:block;margin-bottom:10px;color:var(--mute);font-weight:500}
+.toc div{border-left:2px solid var(--line)}
+.toc a{display:block;padding:4px 12px;color:var(--sub);text-decoration:none;line-height:1.5}
+.toc a:hover{color:var(--brand)}
+.toc a.l3{padding-left:28px;color:var(--mute)}
+h1.t{margin:0 0 8px;font-size:34px;line-height:1.3}
+.lead{margin:0 0 30px;color:var(--sub)}
+h2.cat{margin:30px 0 14px;font-size:15px;color:var(--mute);font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;text-decoration:none;color:inherit}
+.card:hover{border-color:var(--brand);box-shadow:0 12px 28px -20px var(--brand)}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0;font-size:14px;color:var(--sub)}
+.empty{background:#fff;border:1px solid var(--line);border-radius:16px;padding:40px 20px;text-align:center;color:var(--sub)}
+footer{border-top:1px solid var(--line);padding:30px 0;font-size:13px;color:var(--mute)}
+footer .in{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--mute);margin-right:18px}
+footer p{margin:0}
+@media(max-width:1180px){.layout{grid-template-columns:260px minmax(0,1fr)}.toc{display:none}}
+@media(max-width:820px){
+ .layout{display:block}
+ .side{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding:12px 16px}
+ .main{padding:24px 20px 56px}
+ .doc h1,h1.t{font-size:27px}
+ .doc h2{font-size:22px}
+ nav a:not(.btn):not(.on){display:none}
+ .pn{flex-direction:column}.pn a{max-width:100%}.pn .next{margin-left:0}
+}
+</style><style>@font-face{font-family:MiSans;src:url('../../assets/misans.woff2') format('woff2');font-display:swap}body{font-family:MiSans,system-ui,sans-serif}.rv{opacity:1!important;transform:none!important;visibility:visible!important}.btn,button,.leyra-action{background:#ae390e!important;border-color:#ae390e!important;color:#fff!important;text-decoration:none!important}.btn:hover,button:hover,.leyra-action:hover{background:#922b07!important}.leyra-action{display:inline-block;border:0;border-radius:8px;padding:11px 17px;font:inherit;cursor:pointer}.leyra-platform{margin:18px 0;background:#fff0e5;color:#713010;padding:12px 16px;border-radius:8px}</style><script defer="True" src="../../assets/site.js"></script><link href="../../assets/leyra-orange-104.jpeg" rel="icon" type="image/jpeg"/><style>
+.brand .leyra-brand-logo { display:block; width:36px; height:36px; flex:none; object-fit:cover; border-radius:8px; border:0; box-shadow:none; }
+.brand { display:inline-flex; align-items:center; gap:9px; }
+.leyra-action:focus-visible,.btn:focus-visible,button:focus-visible {outline:3px solid #963105;outline-offset:3px}
+</style></head>
+<body><header><div class="in"><a class="brand" href="../../"><img alt="" class="leyra-brand-logo" height="36" src="../../assets/leyra-orange-104.jpeg" width="36"/>Leyra</a><nav><a href="../../#features">功能</a><a href="../../#how">使用方法</a><a href="../../#pricing">价格</a><a href="../../#faq">常见问题</a><a class="on" href="../">文档库</a><a class="btn" href="../../#get">下载客户端</a></nav></div></header>
+<div class="layout"><aside aria-label="文档目录" class="side"><a href="../">全部文档</a><a href="../changelog/">更新日志</a><a href="../desktop-quick-start/">快速上手:安装、登录、连接</a><a href="../buy-static-ip/">独享 · 静态 ISP 代理 IP 怎么买</a><a href="../desktop-modes/">虚拟网卡模式和本地代理模式</a><a href="../desktop-coverage/">哪些流量能管住,哪些管不住</a><a href="../desktop-security-software/">安全软件弹窗和拦截怎么办</a><a href="../desktop-checks/">八项检测是什么、异常怎么处理</a><a href="../desktop-faq/">桌面客户端常见问题</a><details open=""><summary>AI 使用指南</summary><div class="kids"><details class="sub" open=""><summary>入门导读</summary><div class="kids"><a href="../getting-started/">新手路线:从安装到稳定使用</a><a href="../three-factors/">稳定使用 AI 的三个要素:网络、设备、使用习惯</a></div></details><details class="sub" open=""><summary>网络配置</summary><div class="kids"><a href="../shadowrocket-setup/">iPhone:Shadowrocket 配置指南</a><a aria-current="page" class="cur" href="./">网络常见问题</a><a href="../choose-front-node/">前置节点怎么选</a></div></details></div></details></aside><div class="main"><div class="crumb"><a href="../">文档库</a><i>›</i><span>AI 使用指南</span><i>›</i><span>网络配置</span><i>›</i><span>网络常见问题</span></div><article class="doc"><h1>网络常见问题</h1><p class="leyra-platform">当前 Leyra 发行包仅支持 Apple 芯片 Mac。本页中的 Windows、手机和第三方客户端操作为原站参考资料。</p><p class="meta">更新于 2026-10-14</p><p>这里收集的是用户在配置和日常使用 Leyra 时真实问过的问题。电脑端的完整步骤见 <a href="../">Clash Verge Rev 配置指南</a>,iPhone 见 <a href="../shadowrocket-setup/">Shadowrocket 配置指南</a>。</p>
+<hr/>
+<h3 id="s1">Clash Verge Rev 里多了几个分组,要我手动选吗?</h3>
+<p>一般不用。粘贴扩展脚本后,Clash Verge Rev 的「代理」页会多出三个分组:</p>
+<ul><li><strong>AI 专用</strong>:Claude、ChatGPT、Gemini 的流量走这里,里面只有你的独享 IP。如果暂时连不上独享 IP,请求会直接失败,不会偷偷改走别的节点或直连,所以你不会在不知情的情况下换了出口。</li><li><strong>普通代理</strong>:其他境外网站走这里,成员是你订阅里的节点,和你以前选节点的方式一样。</li><li><strong>AI 前置</strong>:连接独享 IP 时经过的那一段。它优先用你在「普通代理」里选的节点,这个节点断了会自动换到订阅里其他能用的节点,恢复后再换回来。</li></ul>
+<p>你所在地区的网站直连,不经过任何节点。前置节点的选法见 <a href="../choose-front-node/">前置节点怎么选</a>。</p>
+<h3 id="s2">系统代理和 TUN 模式,开哪个?</h3>
+<p>看你怎么用 AI:</p>
+<ul><li>只在浏览器里用网页版:打开「系统代理」就够了。</li><li>还要用 Claude、ChatGPT 的桌面客户端,或者命令行工具:再打开「TUN 模式」。有些程序不理会系统代理,TUN 模式能把它们的流量也接管过来。</li></ul>
+<p>两个同时开没有问题。</p>
+<h3 id="s3">去查 IP 的网站看,显示的不是我的独享 IP,是不是没生效?</h3>
+<p>大多数情况是正常的。我们的配置只让 AI 相关的网站走独享 IP,查 IP 的网站不属于 AI 网站,所以它看到的是你原来的节点,或者你本地网络的出口。</p>
+<p>要确认 AI 用的是不是你的 IP,用插件里的网络环境体检,或者在 Clash 的连接列表里看 claude.ai 走的是哪个分组。具体做法见 <a href="../">怎样确认 AI 用的是你的独享 IP</a>。</p>
+<h3 id="s4">打开 AI 网站时被插件拦住了,怎么回事?</h3>
+<p>开通会员后,插件会在你打开 AI 网站前检查一次出口。如果 AI 网站看到的不是你的 IP,或者 WebRTC 保护没有生效,插件会先拦住,并写清楚它看到的是哪个 IP、应该是哪个 IP。常见的处理办法:</p>
+<ol><li>确认 Clash Verge Rev 正在运行,并且打开了「系统代理」或「TUN 模式」。</li><li>在 Clash 的「代理」页看「AI 专用」分组,里面应该是你的 IP。</li><li>刚换过电脑,或者在插件里重新生成过脚本,就在插件里再复制一次脚本,粘贴到「扩展脚本」里保存。</li><li>回到拦截页点「重新检测」。</li></ol>
+<p>如果提示的是 WebRTC,通常是别的扩展(比如其他 VPN 扩展、WebRTC 防护类扩展)改了浏览器设置。关掉它们,重新打开浏览器,插件会自动开启保护。</p>
+<h3 id="s5">粘贴脚本后 Clash 报错,或者没有任何变化</h3>
+<p>先检查三件事:</p>
+<ul><li>用的是不是 Clash Verge Rev 的较新版本。很老的 Clash 客户端不认识脚本里的写法。</li><li>是不是粘贴到了你<strong>正在使用</strong>的那个订阅的「扩展脚本」里。粘到别的订阅上不会生效。</li><li>粘贴前有没有清空原来的内容,粘贴后有没有点「保存」。</li></ul>
+<p>都没问题还是不行,在插件里重新复制一次脚本再试。</p>
+<h3 id="s6">体检提示「DNS 解析器和出口不在同一个国家」</h3>
+<p>意思是网站的域名查询没有从出口那边发出,而是走了你本地网络的 DNS。我们的脚本已经把 AI 相关域名的查询交给独享 IP 处理,但在 Windows 上,系统有时会把同一个查询同时发给所有网卡,导致本地 DNS 也收到。</p>
+<p>处理方法:在 Clash Verge Rev 的 TUN 设置里打开「严格路由」,保存后回插件重新检测。如果你同时在用别的 VPN 软件,或者要访问局域网里自建的 DNS,打开严格路由后可能受影响,出问题把它关回去就行。</p>
+<h3 id="s7">体检提示电脑时区和出口不一致</h3>
+<p>插件按浏览器时区推断你所在的国家。如果你人在海外,只是电脑时区没改,点这一项下面的「我在海外,不再提示」即可。</p>
+<p>我们的原则是让 AI 看到的出口和你<strong>实际所在的国家</strong>一致。如果你人在 AI 服务不支持的地区,换出口解决不了这个问题,插件也会直接告诉你。</p>
+<h3 id="s8">打开 AI 网站很慢,或者第一次打开要转半天</h3>
+<p>AI 流量要先经过前置节点,再到独享 IP,比直接上网多一段路,所以前置节点的质量直接影响速度。先在 Clash 的「普通代理」里换一个延迟低、稳定的节点试试,具体见 <a href="../choose-front-node/">前置节点怎么选</a>。</p>
+<h3 id="s9">Gemini 提示「所在地区不支持」,Claude 却正常</h3>
+<p>Google 判断地区用的是它自己的 IP 位置数据,有时会和其他服务不一致,或者更新得比较慢。插件体检里 Gemini 只能测连通,测不到 Google 看到的地区。遇到这种情况,先确认 Claude 和 ChatGPT 看到的出口国家是对的,然后联系在线客服,告诉我们你的 IP 和出现提示的时间,我们来核对。</p>
+<h3 id="s10">换了 IP,要重新复制脚本吗?</h3>
+<p>电脑上不用。Clash Verge Rev 会在 1 小时内自动拿到新 IP;想马上生效,在 Clash Verge Rev 里更新当前订阅或重启它,再回插件重新检测。</p>
+<p>iPhone 上的小火箭不会自己更新,要在小火箭「配置」页下拉刷新,或者点这份配置选「更新」。</p>
+<p>另外,独享 IP 不能随意更换。只有服务期内 IP 持续连不上 AI 网站时,插件才会提供「更换 IP」,30 天内最多换 2 次。</p>
+<h3 id="s11">首页提示「扩展脚本有新版本」</h3>
+<p>说明我们更新了脚本里需要重新粘贴才能生效的部分。在首页「设备与脚本」里复制新脚本,粘贴到 Clash Verge Rev 的「扩展脚本」里保存即可。你的 IP 和连接信息都不变。只是分流规则的更新不需要你做任何事,脚本会自动拉取。</p>
+<h3 id="s12">支持安卓、软路由、直接导入 YAML 吗?</h3>
+<p>目前不支持。电脑端只支持 Clash Verge Rev(Windows、macOS),手机端只支持 iPhone、iPad 上的 Shadowrocket。</p>
+<h3 id="s13">自己搞不定,能找人帮忙吗?</h3>
+<p>可以。先在插件的网络环境体检页点右上角的复制按钮,复制诊断报告,然后打开插件里的在线客服,把报告发过来,说明你遇到的情况。诊断报告里有出口、DNS、分流等检测结果,能帮我们更快判断问题出在哪。</p><div class="pn"><a href="../shadowrocket-setup/"><small>上一篇</small>iPhone:Shadowrocket 配置指南</a><a class="next" href="../choose-front-node/"><small>下一篇</small>前置节点怎么选</a></div></article></div><aside aria-label="本页目录" class="toc"><b>本页目录</b><div><a class="l3" href="#s1">Clash Verge Rev 里多了几个分组,要我手动选吗?</a><a class="l3" href="#s2">系统代理和 TUN 模式,开哪个?</a><a class="l3" href="#s3">去查 IP 的网站看,显示的不是我的独享 IP,是不是没生效?</a><a class="l3" href="#s4">打开 AI 网站时被插件拦住了,怎么回事?</a><a class="l3" href="#s5">粘贴脚本后 Clash 报错,或者没有任何变化</a><a class="l3" href="#s6">体检提示「DNS 解析器和出口不在同一个国家」</a><a class="l3" href="#s7">体检提示电脑时区和出口不一致</a><a class="l3" href="#s8">打开 AI 网站很慢,或者第一次打开要转半天</a><a class="l3" href="#s9">Gemini 提示「所在地区不支持」,Claude 却正常</a><a class="l3" href="#s10">换了 IP,要重新复制脚本吗?</a><a class="l3" href="#s11">首页提示「扩展脚本有新版本」</a><a class="l3" href="#s12">支持安卓、软路由、直接导入 YAML 吗?</a><a class="l3" href="#s13">自己搞不定,能找人帮忙吗?</a></div></aside></div>
+<footer><div class="in"><p>© 2026 Leyra</p><div><a href="../../privacy/">隐私政策</a><a href="../../terms/">服务条款</a></div></div></footer></body></html>

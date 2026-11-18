@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>账号与授权 · Leyra</title>
+<meta content="noindex" name="robots"/>
+<meta content="#06211D" name="theme-color"/>
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#0E1A18;--sub:#3A4844;--mute:#6B7772;--line:#E1E7E4;--bg:#F6F8F7;--brand:#0B6B5C;--brand-d:#08493F;--tint:#DCEFEA;--night:#05171A;--glow:#2BD4AE;--glow2:#7CE8CF;--bad:#C2410C;--bad-bg:#FDE6E2;--warn-bg:#FFF0D6;--warn:#8A5A00;
+ --sans:'IBM Plex Sans','PingFang SC','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:var(--sans);color:var(--ink);background:radial-gradient(120% 80% at 70% 0%,#0D3B34 0%,var(--night) 60%);line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(70% 60% at 50% 30%,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(70% 60% at 50% 30%,#000 30%,transparent 80%);pointer-events:none}
+.blob{position:fixed;width:520px;height:520px;border-radius:50%;background:#14B892;filter:blur(80px);opacity:.35;top:-200px;right:-120px;pointer-events:none;animation:drift 18s ease-in-out infinite}
+@keyframes drift{50%{transform:translate(-40px,40px) scale(1.08)}}
+a{color:var(--brand)}
+header{position:relative;z-index:2}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1120px;margin:0 auto;padding:0 24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;color:#fff;text-decoration:none;font-size:17px}
+.brand img{width:28px;height:28px;border-radius:8px}
+header nav a{color:rgba(255,255,255,.72);text-decoration:none;font-size:14.5px;margin-left:22px}
+header nav a:hover{color:#fff}
+main{position:relative;z-index:1;padding:36px 16px 80px;display:flex;justify-content:center}
+.card{width:100%;max-width:420px;background:#fff;border-radius:22px;padding:34px 30px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);animation:in .5s cubic-bezier(.2,.8,.2,1)}
+.card.wide{max-width:760px}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+h1{margin:0 0 6px;font-size:24px;letter-spacing:-.3px}
+.lead{margin:0 0 24px;color:var(--sub);font-size:14.5px}
+label{display:block;font-size:13.5px;font-weight:500;color:var(--sub);margin:14px 0 6px}
+input[type=email],input[type=password]{width:100%;height:48px;padding:0 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:15px;color:var(--ink);background:#fff;transition:border-color .2s,box-shadow .2s}
+input:focus{outline:0;border-color:var(--brand);box-shadow:0 0 0 4px rgba(11,107,92,.12)}
+.pw{position:relative}
+.pw button{position:absolute;right:8px;top:8px;height:32px;padding:0 10px;border:0;background:none;color:var(--mute);font:inherit;font-size:13px;cursor:pointer}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:48px;margin-top:22px;border:0;border-radius:12px;background:var(--brand);color:#fff;font:inherit;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s}
+.btn:hover{background:var(--brand-d)}
+.btn:active{transform:scale(.99)}
+.btn[disabled]{opacity:.6;cursor:default}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{background:var(--bg)}
+.btn svg{width:18px;height:18px}
+.spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+.btn.ghost .spin{border-color:var(--line);border-top-color:var(--brand)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.or{display:flex;align-items:center;gap:12px;margin:22px 0 0;color:var(--mute);font-size:13px}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;font-size:14px}
+.row a,.link{color:var(--brand);text-decoration:none;cursor:pointer;background:none;border:0;font:inherit;padding:0}
+.row a:hover,.link:hover{text-decoration:underline}
+.foot{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);text-align:center;font-size:14px;color:var(--sub)}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:13.5px;color:var(--sub)}
+.check input{margin-top:4px;accent-color:var(--brand);width:16px;height:16px}
+.msg{display:none;margin-top:16px;padding:12px 14px;border-radius:12px;font-size:14px}
+.msg.show{display:block;animation:in .3s ease}
+.msg.bad{background:var(--bad-bg);color:var(--bad)}
+.msg.ok{background:var(--tint);color:#0A5A4C}
+.msg .link{font-weight:600;margin-left:4px}
+.hint{font-size:12.5px;color:var(--mute);margin-top:6px}
+.icon-ok{width:56px;height:56px;border-radius:50%;background:var(--tint);color:var(--brand);display:grid;place-items:center;margin-bottom:18px}
+.icon-ok svg{width:26px;height:26px}
+.view{display:none}.view.on{display:block}
+
+/* 账户页 */
+.acct-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}
+.acct-head .email{font-family:var(--mono);font-size:14px;color:var(--sub);word-break:break-all}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--bg)}
+.box.full{grid-column:1/-1}
+.box h3{margin:0 0 10px;font-size:13px;font-weight:500;color:var(--mute);letter-spacing:.3px}
+.big{font-size:20px;font-weight:600}
+.kv{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:5px 0;color:var(--sub)}
+.kv b{color:var(--ink);font-weight:500;text-align:right}
+.ip{font-family:var(--mono);font-size:20px;font-weight:500;letter-spacing:.3px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 11px;border-radius:999px;font-size:12.5px;font-weight:600;background:var(--tint);color:#0A5A4C;vertical-align:middle}
+.pill i{width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.bad{background:var(--bad-bg);color:var(--bad)}
+.pill.unk{background:#E9ECEB;color:var(--sub)}
+.dev{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.dev:last-child{border:0}
+.dev small{display:block;color:var(--mute);font-size:12.5px}
+.empty{color:var(--mute);font-size:14px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.actions .btn{width:auto;flex:1;min-width:180px;margin-top:0;padding:0 20px}
+.note{margin-top:16px;font-size:13px;color:var(--mute)}
+.skel{height:14px;border-radius:7px;background:linear-gradient(90deg,#EEF2F0,#F7F9F8,#EEF2F0);background-size:200% 100%;animation:sk 1.2s infinite;margin:10px 0}
+@keyframes sk{to{background-position:-200% 0}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}.card{padding:28px 20px}.acct-head{flex-direction:column}header nav a:not(:last-child){display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+<style>.btn,button,.button{display:inline-block;background:#ae390e!important;border:1px solid #ae390e!important;color:#fff!important;border-radius:8px;padding:10px 16px;text-decoration:none!important;cursor:pointer}.panel{margin:20px 0;padding:18px;border-radius:10px;background:#fff0e5}.group strong{display:block}.blob{background:#ffcfb7!important}</style><script defer="True" src="../assets/site.js?v=104-brand"></script><link href="../assets/leyra-orange-104.jpeg" rel="icon" type="image/jpeg"/><style>
+.brand .leyra-brand-logo { display:block; width:36px; height:36px; flex:none; object-fit:cover; border-radius:8px; border:0; box-shadow:none; }
+.brand { display:inline-flex; align-items:center; gap:9px; }
+.leyra-action:focus-visible,.btn:focus-visible,button:focus-visible {outline:3px solid #963105;outline-offset:3px}
+</style></head>
+<body>
+<div class="blob"></div>
+<header><div class="wrap">
+<a class="brand" href="../"><img alt="" class="leyra-brand-logo" height="36" src="../assets/leyra-orange-104.jpeg" width="36"/>Leyra</a>
+<nav><a href="../#pricing">价格</a><a href="../docs/">文档库</a><a href="../">返回首页</a></nav>
+</div></header>
+<main><div class="card view"><a href="../docs/">使用文档</a><h1>账号与授权</h1><p>注册、登录和重置密码请在 Leyra Mac 客户端操作。收到验证或重置邮件后，请通过邮件里的专用链接完成对应操作。</p><aside aria-labelledby="license" class="panel"><h2 id="license">软件永久授权</h2><strong class="price">¥199</strong><p>注册并验证邮箱后，可免费试用 1 天。使用时需自备独享 IP。</p><div class="group">QQ 客服群<strong>1136427075</strong></div><button data-copy-group="" type="button">复制群号</button><p class="status" role="status"></p></aside><div class="actions"><a class="button" href="https://client-api.leyra.xin/downloads/desktop/Leyra-macOS-arm64.dmg">下载 Mac 版</a></div></div></main>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="no-referrer" name="referrer"/><title>前置节点怎么选 · 文档库 · Leyra</title><meta content="前置节点决定 AI 连接的速度和稳定性,但不改变出口。讲清楚它在哪里设置、怎么挑、连不上时怎么排查。" name="description"/><link href="./" rel="canonical"/><meta content="article" property="og:type"/><meta content="AI Network" property="og:site_name"/><meta content="前置节点怎么选 · 文档库 · AI Network" property="og:title"/><meta content="前置节点决定 AI 连接的速度和稳定性,但不改变出口。讲清楚它在哪里设置、怎么挑、连不上时怎么排查。" property="og:description"/><meta content="https://client-api.leyra.xin/docs/choose-front-node" property="og:url"/><meta content="https://client-api.leyra.xin/assets/leyra-orange-104.jpeg" property="og:image"/><meta content="summary" name="twitter:card"/><style>
+:root{--ink:#101A19;--sub:#33413D;--mute:#6B7772;--line:#DDE3E0;--bg:#F3F5F4;--brand:#0B6B5C;--tint:#DCEFEA}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font-family:'IBM Plex Sans','Microsoft YaHei','PingFang SC',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75}
+a{color:var(--brand)}
+header{position:sticky;top:0;z-index:5;background:rgba(243,245,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .in{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--ink);text-decoration:none}
+nav{display:flex;gap:22px;align-items:center;font-size:14.5px}
+nav a{color:var(--sub);text-decoration:none}
+nav a:hover,nav a.on{color:var(--brand)}
+nav a.on{font-weight:600}
+nav .btn{color:#fff;padding:8px 16px;font-size:14px}
+.btn{display:inline-block;border-radius:12px;background:var(--brand);color:#fff;font-weight:600;text-decoration:none}
+.btn:hover{background:#08493F;color:#fff}
+.layout{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:280px minmax(0,1fr) 230px;gap:0;align-items:start}
+.side{position:sticky;top:60px;max-height:calc(100vh - 60px);overflow-y:auto;padding:24px 14px 40px 20px;border-right:1px solid var(--line);font-size:14.5px}
+.side details{margin:0}
+.side summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;font-weight:600;color:var(--ink)}
+.side summary::-webkit-details-marker{display:none}
+.side summary::before{content:"";width:6px;height:6px;border-right:1.6px solid var(--mute);border-bottom:1.6px solid var(--mute);transform:rotate(45deg);margin:0 4px 3px 2px;flex:none;transition:transform .15s}
+.side details:not([open])>summary::before{transform:rotate(-45deg);margin-bottom:0}
+.side .sub>summary{font-weight:500;color:var(--mute);font-size:14px}
+.side .kids{margin-left:12px;padding-left:8px;border-left:1px solid var(--line)}
+.side a{display:block;padding:7px 12px;border-radius:8px;color:var(--sub);text-decoration:none;line-height:1.5}
+.side a:hover{background:#E9EFEC}
+.side a.cur{background:#fff;color:var(--brand);font-weight:600;box-shadow:0 1px 0 var(--line)}
+.main{padding:32px 48px 72px;min-width:0}
+.crumb{font-size:13.5px;color:var(--mute);margin-bottom:18px}
+.crumb a{color:var(--mute);text-decoration:none}
+.crumb a:hover{color:var(--brand)}
+.crumb i{font-style:normal;margin:0 6px}
+.doc{max-width:780px}
+.doc h1{margin:0 0 6px;font-size:34px;line-height:1.3;letter-spacing:-.3px}
+.meta{margin:0 0 28px;font-size:13px;color:var(--mute)}
+.doc h2{margin:44px 0 12px;font-size:26px;line-height:1.35}
+.doc h3{margin:32px 0 10px;font-size:20px}
+.doc h4,.doc h5{margin:22px 0 8px;font-size:16.5px}
+.doc p,.doc li{font-size:16px;color:#26332F}
+.doc p{margin:0 0 16px}
+.doc ul,.doc ol{margin:0 0 16px;padding-left:24px}
+.doc li{margin-bottom:5px}
+.doc img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--line)}
+.doc blockquote{margin:0 0 18px;padding:6px 18px;border-left:4px solid #D9822B;background:#F7F1E8;border-radius:0 10px 10px 0}
+.doc blockquote p{margin:8px 0;color:#4F4636}
+.doc hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+code{font-family:'IBM Plex Mono',Consolas,monospace;font-size:.9em;background:#E8EEEB;border-radius:6px;padding:1px 6px}
+pre{margin:0 0 18px;padding:14px 16px;background:#0F1A18;color:#E6F2EE;border-radius:12px;overflow-x:auto;line-height:1.6}
+pre code{background:none;padding:0;color:inherit;font-size:13.5px}
+.pn{display:flex;justify-content:space-between;gap:16px;margin-top:48px;padding-top:22px;border-top:1px solid var(--line)}
+.pn a{display:block;max-width:48%;padding:12px 16px;border:1px solid var(--line);background:#fff;border-radius:12px;text-decoration:none;color:var(--ink)}
+.pn a:hover{border-color:var(--brand)}
+.pn small{display:block;color:var(--mute);font-size:12.5px}
+.pn .next{margin-left:auto;text-align:right}
+.toc{position:sticky;top:60px;padding:28px 16px 40px 8px;font-size:13.5px;max-height:calc(100vh - 60px);overflow-y:auto}
+.toc b{display:block;margin-bottom:10px;color:var(--mute);font-weight:500}
+.toc div{border-left:2px solid var(--line)}
+.toc a{display:block;padding:4px 12px;color:var(--sub);text-decoration:none;line-height:1.5}
+.toc a:hover{color:var(--brand)}
+.toc a.l3{padding-left:28px;color:var(--mute)}
+h1.t{margin:0 0 8px;font-size:34px;line-height:1.3}
+.lead{margin:0 0 30px;color:var(--sub)}
+h2.cat{margin:30px 0 14px;font-size:15px;color:var(--mute);font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;text-decoration:none;color:inherit}
+.card:hover{border-color:var(--brand);box-shadow:0 12px 28px -20px var(--brand)}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0;font-size:14px;color:var(--sub)}
+.empty{background:#fff;border:1px solid var(--line);border-radius:16px;padding:40px 20px;text-align:center;color:var(--sub)}
+footer{border-top:1px solid var(--line);padding:30px 0;font-size:13px;color:var(--mute)}
+footer .in{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--mute);margin-right:18px}
+footer p{margin:0}
+@media(max-width:1180px){.layout{grid-template-columns:260px minmax(0,1fr)}.toc{display:none}}
+@media(max-width:820px){
+ .layout{display:block}
+ .side{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding:12px 16px}
+ .main{padding:24px 20px 56px}
+ .doc h1,h1.t{font-size:27px}
+ .doc h2{font-size:22px}
+ nav a:not(.btn):not(.on){display:none}
+ .pn{flex-direction:column}.pn a{max-width:100%}.pn .next{margin-left:0}
+}
+</style><style>@font-face{font-family:MiSans;src:url('../../assets/misans.woff2') format('woff2');font-display:swap}body{font-family:MiSans,system-ui,sans-serif}.rv{opacity:1!important;transform:none!important;visibility:visible!important}.btn,button,.leyra-action{background:#ae390e!important;border-color:#ae390e!important;color:#fff!important;text-decoration:none!important}.btn:hover,button:hover,.leyra-action:hover{background:#922b07!important}.leyra-action{display:inline-block;border:0;border-radius:8px;padding:11px 17px;font:inherit;cursor:pointer}.leyra-platform{margin:18px 0;background:#fff0e5;color:#713010;padding:12px 16px;border-radius:8px}</style><script defer="True" src="../../assets/site.js"></script><link href="../../assets/leyra-orange-104.jpeg" rel="icon" type="image/jpeg"/><style>
+.brand .leyra-brand-logo { display:block; width:36px; height:36px; flex:none; object-fit:cover; border-radius:8px; border:0; box-shadow:none; }
+.brand { display:inline-flex; align-items:center; gap:9px; }
+.leyra-action:focus-visible,.btn:focus-visible,button:focus-visible {outline:3px solid #963105;outline-offset:3px}
+</style></head>
+<body><header><div class="in"><a class="brand" href="../../"><img alt="" class="leyra-brand-logo" height="36" src="../../assets/leyra-orange-104.jpeg" width="36"/>Leyra</a><nav><a href="../../#features">功能</a><a href="../../#how">使用方法</a><a href="../../#pricing">价格</a><a href="../../#faq">常见问题</a><a class="on" href="../">文档库</a><a class="btn" href="../../#get">下载客户端</a></nav></div></header>
+<div class="layout"><aside aria-label="文档目录" class="side"><a href="../">全部文档</a><a href="../changelog/">更新日志</a><a href="../desktop-quick-start/">快速上手:安装、登录、连接</a><a href="../buy-static-ip/">独享 · 静态 ISP 代理 IP 怎么买</a><a href="../desktop-modes/">虚拟网卡模式和本地代理模式</a><a href="../desktop-coverage/">哪些流量能管住,哪些管不住</a><a href="../desktop-security-software/">安全软件弹窗和拦截怎么办</a><a href="../desktop-checks/">八项检测是什么、异常怎么处理</a><a href="../desktop-faq/">桌面客户端常见问题</a><details open=""><summary>AI 使用指南</summary><div class="kids"><details class="sub" open=""><summary>入门导读</summary><div class="kids"><a href="../getting-started/">新手路线:从安装到稳定使用</a><a href="../three-factors/">稳定使用 AI 的三个要素:网络、设备、使用习惯</a></div></details><details class="sub" open=""><summary>网络配置</summary><div class="kids"><a href="../shadowrocket-setup/">iPhone:Shadowrocket 配置指南</a><a href="../network-faq/">网络常见问题</a><a aria-current="page" class="cur" href="./">前置节点怎么选</a></div></details></div></details></aside><div class="main"><div class="crumb"><a href="../">文档库</a><i>›</i><span>AI 使用指南</span><i>›</i><span>网络配置</span><i>›</i><span>前置节点怎么选</span></div><article class="doc"><h1>前置节点怎么选</h1><p class="leyra-platform">当前 Leyra 发行包仅支持 Apple 芯片 Mac。本页中的 Windows、手机和第三方客户端操作为原站参考资料。</p><p class="meta">更新于 2026-10-29</p><p>用 Leyra 时,AI 流量不是直接连到你的独享 IP,而是先经过你自己订阅里的一个节点,再到独享 IP。中间这个节点,我们叫它「前置节点」。很多「突然连不上」「打开很慢」的问题,最后都查到前置节点身上。这篇讲它是什么、在哪里设置、怎么挑。</p>
+<h3 id="s1">前置节点在整条路上的位置</h3>
+<p>一次 AI 请求的路线是这样的:</p>
+<ol><li>你的电脑或手机</li><li>前置节点(你自己订阅里的某个节点)</li><li>你的独享 IP</li><li>AI 网站</li></ol>
+<p>有两点要先说清楚:</p>
+<ul><li><strong>前置节点不改变出口</strong>。不管前置换成哪个节点,AI 网站看到的始终是你的独享 IP。所以换前置节点是安全的,不用担心「换节点等于换了出口」。</li><li><strong>前置节点决定这条路好不好走</strong>。前置节点慢,AI 就慢;前置节点断了,整条路就断了,即使独享 IP 本身完全正常。</li></ul>
+<h3 id="s2">在哪里设置</h3>
+<p><strong>电脑:Clash Verge Rev</strong></p>
+<p>扩展脚本会在 Clash Verge Rev 的「代理」页加几个分组,和前置有关的是两个:</p>
+<ul><li><strong>普通代理</strong>:你在这里选中的节点,就是首选的前置节点。同时,其他境外网站也走这个分组,所以它也影响你平时上网。</li><li><strong>AI 前置</strong>:由脚本自动管理,不需要你手动选。它排在第一位的是你在「普通代理」里选的节点;这个节点不可用时,它会自动换到订阅里其他能用的节点,等你选的节点恢复后再换回来。</li></ul>
+<p>也就是说,你只需要在「普通代理」里选一个好用的节点,剩下的由「AI 前置」兜底。</p>
+<p><strong>iPhone:Shadowrocket</strong></p>
+<p>导入配置后,小火箭里有一个「前置中转」分组,默认是「自动选择」,会从你小火箭里已有的节点中挑一个延迟低的。想自己指定,就把「前置中转」改成「手动选择」,再到「手动选择」里挑一个节点。</p>
+<h3 id="s3">怎么挑一个好的前置节点</h3>
+<p><strong>稳定比快更重要</strong></p>
+<p>AI 对话时连接要保持比较久,特别是生成长回答、上传文件的时候。一个延迟稍高但很少断的节点,往往比一个测速很快但时不时掉线的节点好用。如果你发现插件体检里的连通率偏低,或者用着用着经常要重新加载,先考虑换一个更稳的前置节点。</p>
+<p><strong>延迟别太高</strong></p>
+<p>前置节点加上独享 IP,整条路比你平时上网多一段,延迟会叠加。前置节点本身延迟就很高的话,每次发消息都要多等一会儿。一般来说,前置节点离独享 IP 所在的地区近一些,整体延迟会低一些,但这取决于你的节点服务商的线路,最好实际试几个对比一下。</p>
+<p><strong>留意基于 UDP 的节点</strong></p>
+<p>有些节点用的是基于 UDP 的协议(比如 Hysteria2、TUIC 之类)。在一些网络环境下,运营商会限制 UDP 流量,这时这类节点可能会一起断掉,而基于 TCP 的节点照常能用。如果你发现某一类节点经常集体掉线,可以把首选的前置节点换成基于 TCP 的。电脑上的「AI 前置」在自动换备用节点时,也会优先选基于 TCP 的节点。</p>
+<p><strong>节点本身要正常</strong></p>
+<p>订阅里常有一些不是真正节点的条目,比如写着剩余流量、到期时间、官网地址的。这些是连不通的,不要选它们做前置。</p>
+<h3 id="s4">连不上时怎么判断是不是前置的问题</h3>
+<p>下面这些情况,大概率和前置节点有关:</p>
+<ul><li>其他境外网站都正常,只有 Claude、ChatGPT 打不开。</li><li>插件提示 IP 不可用,但你刚刚换过节点订阅,或者订阅里的节点最近不太稳。</li><li>iPhone 上手机自检显示「连不上你的 IP」。</li></ul>
+<p>排查步骤:</p>
+<ol><li><strong>换一个前置节点</strong>。电脑上在 Clash 的「普通代理」里换一个节点;iPhone 上把「前置中转」改成「手动选择」,换一个节点。</li><li><strong>回插件重新检测</strong>。电脑上在体检页或首页点「重新检测」;iPhone 上重新扫码自检。</li><li><strong>多试几个</strong>。如果换了好几个节点都不行,再看是不是别的问题,比如 Clash Verge Rev 没在运行、扩展脚本没启用。可以对照 <a href="../network-faq/">网络常见问题</a> 排查。</li></ol>
+<p>还有一种可能,只是我们推测、没法替你确认:个别节点服务商会限制转发到某些端口,导致这家的节点连不上独享 IP,而连其他网站一切正常。如果你订阅里所有节点都连不上独享 IP,换另一家的节点却可以,可以问问原来的服务商是否有这类限制。</p>
+<p>都排查过还是不行,在插件的体检页复制诊断报告,发给在线客服,我们一起看。</p>
+<h3 id="s5">换了节点订阅以后</h3>
+<p>不需要重新复制脚本,也不需要重新导入小火箭配置。</p>
+<ul><li>电脑上,扩展脚本每次运行都会把订阅里的节点重新收进「普通代理」和「AI 前置」。更新订阅后,新节点会自动出现在里面,你在「普通代理」里重新选一个就行。</li><li>iPhone 上,「自动选择」和「手动选择」是从小火箭里现有的节点里挑的,换了订阅只要小火箭里有新节点就行。</li></ul>
+<h3 id="s6">前置节点不需要和独享 IP 一样「干净」</h3>
+<p>AI 网站看不到你的前置节点,它只看到最后的独享 IP。所以挑前置节点时,不用在意它是不是多人共用、出口在哪个国家,只看两件事:能不能稳定连上你的独享 IP,速度够不够快。</p>
+<p>想进一步了解独享 IP 和普通节点的区别,可以看 <a href="../">什么是独享 · 静态 ISP 代理 IP</a>。</p><div class="pn"><a href="../network-faq/"><small>上一篇</small>网络常见问题</a></div></article></div><aside aria-label="本页目录" class="toc"><b>本页目录</b><div><a class="l3" href="#s1">前置节点在整条路上的位置</a><a class="l3" href="#s2">在哪里设置</a><a class="l3" href="#s3">怎么挑一个好的前置节点</a><a class="l3" href="#s4">连不上时怎么判断是不是前置的问题</a><a class="l3" href="#s5">换了节点订阅以后</a><a class="l3" href="#s6">前置节点不需要和独享 IP 一样「干净」</a></div></aside></div>
+<footer><div class="in"><p>© 2026 Leyra</p><div><a href="../../privacy/">隐私政策</a><a href="../../terms/">服务条款</a></div></div></footer></body></html>

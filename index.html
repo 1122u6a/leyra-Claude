@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Leyra · 长期稳定地用 Claude</title>
+<meta content="你的 IP 再干净，一漏就白搭。装上 AI Network，Claude 永远只从你的 IP 出去：DNS、WebRTC、IPv6 不漏，线路不对先停下。网页、桌面客户端、Claude Code 都覆盖。" name="description"/>
+<meta content="AI Network · 长期稳定地用 Claude" property="og:title"/>
+<meta content="你的 IP 再干净，一漏就白搭。装上它，Claude 永远只从你的 IP 出去。" property="og:description"/>
+<meta content="https://client-api.leyra.xin/assets/leyra-orange-104.jpeg" property="og:image"/>
+<meta content="https://client-api.leyra.xin/" property="og:url"/>
+<meta content="website" property="og:type"/>
+<meta content="#050B1A" name="theme-color"/>
+<!-- 2026-10-23 改版(PM,深蓝色调、世界地图首屏、客户端截图轮播):首屏 → 痛点 → 功能 → 对比 → 价格 → 使用方法 → 3 条常见问题。只写 Claude;常见问题、价格改了要同步改下面的结构化数据 -->
+<link href="./" rel="canonical"/>
+<meta content="summary" name="twitter:card"/>
+<style>
+:root{
+ --bg:#050B1A;--bg2:#0A1530;--panel:rgba(255,255,255,.04);--panel2:rgba(255,255,255,.07);--line:rgba(255,255,255,.09);
+ --ink:#EAF1FA;--sub:rgba(234,241,250,.72);--mute:rgba(234,241,250,.5);
+ --glow:#38A1FF;--glow2:#8FD0FF;--amber:#F2B45A;--red:#F07A6A;
+ --sans:-apple-system,'PingFang SC','Microsoft YaHei','Segoe UI','Noto Sans SC',system-ui,sans-serif;
+ --mono:Consolas,'SF Mono',Menlo,monospace;
+ --r:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+section{padding:110px 0;position:relative;overflow-x:clip}
+.eyebrow{font:500 13px/1 var(--mono);letter-spacing:.14em;color:var(--glow);text-transform:uppercase;margin-bottom:14px}
+h1,h2,h3{margin:0;letter-spacing:-.01em}
+h2{font-size:clamp(28px,4vw,42px);line-height:1.25;font-weight:700}
+.lead{color:var(--sub);font-size:17px;max-width:640px;margin:16px 0 0}
+.grad{background:linear-gradient(90deg,var(--glow2),var(--glow));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:600;text-decoration:none;border:1px solid var(--line);transition:transform .2s,box-shadow .2s,background .2s}
+.btn svg{width:18px;height:18px}
+.btn.glow{background:var(--glow);color:#04122E;border-color:transparent;box-shadow:0 0 0 0 rgba(56,161,255,.5);animation:pulse 2.8s infinite}
+.btn.glow:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(56,161,255,.35)}
+.btn.line:hover{background:var(--panel2)}
+.btn.soon{color:var(--mute);cursor:default;border-style:dashed}
+.btn.soon:hover{background:none}
+.btn.soon em{font-style:normal;font-size:12px;font-weight:600;margin-left:2px;padding:2px 8px;border-radius:999px;background:rgba(242,180,90,.14);color:var(--amber)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(56,161,255,.45)}70%{box-shadow:0 0 0 14px rgba(56,161,255,0)}100%{box-shadow:0 0 0 0 rgba(56,161,255,0)}}
+.note{color:var(--mute);font-size:13.5px;margin-top:14px}
+.note a{color:var(--sub)}
+
+/* 顶栏 */
+header{position:fixed;inset:0 0 auto;z-index:20;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+header.solid{background:rgba(5,11,26,.82);backdrop-filter:blur(12px);border-color:var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none}
+.brand img{width:28px;height:28px;border-radius:8px}
+nav{display:flex;align-items:center;gap:22px;font-size:14.5px}
+nav a{text-decoration:none;color:var(--sub)}
+nav a:hover{color:var(--ink)}
+nav .btn{padding:8px 16px;font-size:14px;color:#04122E}
+@media(max-width:860px){nav a:not(.btn):not(.acct){display:none}}
+@media(max-width:480px){nav{gap:12px}nav .btn{padding:7px 12px;font-size:13px}header .wrap{padding:0 14px}}
+
+/* 首屏 */
+.hero{padding:calc(150px + var(--nb,0px)) 0 90px;overflow:hidden}
+.site-notice{background:#FFF4D6;color:#5A3B00;font-size:13.5px;line-height:1.55;padding:9px 16px;text-align:center}
+.site-notice b{font-weight:700}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto;height:120%;background:radial-gradient(600px 400px at 75% 30%,rgba(56,161,255,.16),transparent 70%),radial-gradient(500px 360px at 10% 10%,rgba(143,208,255,.08),transparent 70%);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(34px,5.2vw,58px);line-height:1.15;font-weight:800}
+.hero .lead{font-size:18px}
+.hero .subtitle{margin:16px 0 0;font-size:clamp(20px,2.4vw,26px);font-weight:700;color:var(--ink)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.trial-pill{display:inline-block;margin-top:22px;padding:7px 16px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--ink);background:linear-gradient(90deg,rgba(56,161,255,.18),rgba(143,208,255,.08));border:1px solid rgba(56,161,255,.45)}
+.trial-pill b{color:var(--glow2)}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}.hero{padding-top:calc(120px + var(--nb,0px))}}
+
+/* 首屏动画：点阵世界地图(PM 10-23)。两种状态来回切：
+   普通节点 = 出口在东京、新加坡、香港、迪拜……之间跳，Claude 看到的地方一直在变；
+   AI Network = 你 → 独享 IP → Claude 一条固定的线，光点稳稳流过 */
+.hero .wrap{grid-template-columns:1fr;text-align:center;gap:34px}
+.hero .lead{margin-left:auto;margin-right:auto}
+.hero .cta{justify-content:center}
+.brandline{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;padding:6px 16px 6px 8px;border-radius:999px;font-weight:700;font-size:16px;letter-spacing:.02em;background:rgba(56,161,255,.1);border:1px solid rgba(56,161,255,.3)}
+.brandline img{width:26px;height:26px;border-radius:7px}
+.easy{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;list-style:none;padding:0;margin:22px 0 0;font-size:15.5px;font-weight:600;color:var(--ink)}
+.easy li{display:inline-flex;align-items:center;gap:8px}
+.easy li::before{content:"";width:18px;height:18px;border-radius:50%;background:var(--glow) url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%2304122E%27 stroke-width=%273.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M5 12l5 5L20 7%27/%3E%3C/svg%3E") center/11px no-repeat}
+.hero h1{font-size:clamp(34px,4.6vw,56px);line-height:1.18}
+.hero .lead{max-width:720px;font-size:17.5px;line-height:1.75;text-wrap:balance}
+.hero .cta{margin-top:28px}
+.hero .note{line-height:1.9}
+.mac-soon{display:inline-flex;align-items:center;gap:4px;color:var(--amber)}
+.mac-soon svg{width:13px;height:13px}
+.geo{position:relative;max-width:1040px;margin:0 auto;width:100%;border:1px solid var(--line);border-radius:24px;background:radial-gradient(120% 90% at 50% 0%,rgba(56,161,255,.08),transparent 60%),rgba(255,255,255,.02);padding:18px 18px 16px;overflow:hidden}
+.geo svg{width:100%;height:auto;display:block}
+.geo .land{fill:rgba(234,241,250,.16)}
+.geo .city circle.c{fill:#F2B45A}
+.geo .city .ring{fill:none;stroke:#F2B45A;stroke-width:1.5;opacity:0}
+.geo .city.hit .ring{animation:ring 1.1s ease-out}
+.geo .city text,.geo .pin text{font:600 12px var(--sans);fill:var(--sub)}
+.geo .city.dim{opacity:.35}
+@keyframes ring{0%{opacity:.9;r:4}100%{opacity:0;r:22}}
+.geo .arc{fill:none;stroke-linecap:round}
+.geo .arc.bad{stroke:#F2B45A;stroke-width:2;stroke-dasharray:4 6;opacity:.9;animation:march 1s linear infinite}
+.geo .arc.good{stroke:url(#ggl);stroke-width:3}
+.geo .arc.glow{stroke:#38A1FF;stroke-width:9;opacity:.18;filter:url(#gbl)}
+@keyframes march{to{stroke-dashoffset:-20}}
+.geo .fade{transition:opacity .6s}
+.geo .pin .dot{fill:#EAF4F1}
+.geo .pin.claude .dot{fill:#38A1FF}
+.geo .pin.ip .dot{fill:#8FD0FF}
+.geo .pin .halo{fill:#38A1FF;opacity:.25;animation:halo 2.4s ease-in-out infinite}
+@keyframes halo{50%{opacity:.05}}
+.geo-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px;text-align:left}
+.geo-sw{display:inline-flex;background:var(--panel2);border-radius:999px;padding:4px;gap:4px}
+.geo-sw button{border:0;background:none;color:var(--sub);font:600 13.5px var(--sans);padding:7px 14px;border-radius:999px;cursor:pointer;transition:background .3s,color .3s}
+.geo-sw button.on.b{background:rgba(242,180,90,.18);color:var(--amber)}
+.geo-sw button.on.g{background:rgba(56,161,255,.18);color:var(--glow2)}
+.geo-seen{font-size:14.5px;color:var(--sub)}
+.geo-seen b{font:600 14.5px var(--mono);transition:color .3s}
+.geo-seen b.bad{color:var(--amber)}.geo-seen b.good{color:var(--glow2)}
+.geo-seen .tip{color:var(--mute);margin-left:6px}
+@media(max-width:640px){.geo{padding:10px 8px 12px;border-radius:16px}.geo .city text{display:none}.geo-bar{justify-content:center;text-align:center}}
+
+/* 进场 */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s!important}.d2{transition-delay:.16s!important}.d3{transition-delay:.24s!important}.d4{transition-delay:.32s!important}
+
+/* ① 痛点：问题在上、解决在下；进场时先出问题，再画一条线，解决办法浮上来 */
+.pains{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+@media(max-width:960px){.pains{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.pains{grid-template-columns:1fr}}
+.pain{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;transition:border-color .6s}
+.pain .tag{font:500 12px var(--mono);letter-spacing:.1em;color:var(--mute);margin-bottom:10px}
+.pain q{font-size:18px;font-weight:600;line-height:1.5;quotes:'「' '」';color:var(--ink)}
+.pain .arrow{position:relative;height:2px;margin:22px 0 18px;background:var(--line);border-radius:2px;overflow:hidden}
+.pain .arrow i{position:absolute;inset:0;background:linear-gradient(90deg,var(--glow),var(--glow2));transform:scaleX(0);transform-origin:left;transition:transform .8s cubic-bezier(.2,.7,.2,1) .5s}
+.pain .tag{color:var(--amber)}
+.more{margin-top:26px;color:var(--mute);font-size:14.5px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.more a{color:var(--glow2);text-decoration:none;border-bottom:1px dashed rgba(143,208,255,.4)}
+.more a:hover{color:var(--ink)}
+.pain .why{margin:10px 0 0;color:var(--sub);font-size:14.5px}
+.pain .fix .tag{color:var(--glow)}
+.pain .fix p{margin:0;color:var(--ink);font-size:15.5px}
+.js .pain .fix{opacity:0;transform:translateY(10px);transition:opacity .6s 1.1s,transform .6s 1.1s}
+.pain.in{border-color:rgba(56,161,255,.3)}
+.pain.in .arrow i{transform:scaleX(1)}
+.pain.in .fix{opacity:1;transform:none}
+.pain.d1 .arrow i{transition-delay:.7s}.pain.d1 .fix{transition-delay:1.3s}
+.pain.d2 .arrow i{transition-delay:.9s}.pain.d2 .fix{transition-delay:1.5s}
+.pain.d3 .arrow i{transition-delay:1.1s}.pain.d3 .fix{transition-delay:1.7s}
+
+/* ② 功能 */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.checks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}.checks .tile h3{margin-top:0}.checks ul{margin:0;padding-left:18px;color:var(--sub);font-size:15px;line-height:1.9}
+@media(max-width:960px){.checks{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){.checks{grid-template-columns:1fr}}
+@media(max-width:900px){.feats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.feats{grid-template-columns:1fr}}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.tile:hover{border-color:rgba(56,161,255,.35);transform:translateY(-3px)}
+.tile::after{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),rgba(56,161,255,.12),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.tile:hover::after{opacity:1}
+.tile h3{font-size:18px;margin:16px 0 8px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.tile h3 .tk{font:500 11.5px var(--mono);letter-spacing:.04em;color:var(--glow2);padding:2px 8px;border-radius:6px;background:rgba(56,161,255,.1);border:1px solid rgba(56,161,255,.25)}
+.tile p{margin:0;color:var(--sub);font-size:15px}
+.ico{width:46px;height:46px;border-radius:13px;background:rgba(56,161,255,.12);display:grid;place-items:center;color:var(--glow)}
+.ico svg{width:24px;height:24px}
+.a-pin svg{animation:bob 3s ease-in-out infinite}
+.a-split svg .mv{animation:dash 2.4s linear infinite;stroke-dasharray:4 4}
+.a-all svg{animation:spin 14s linear infinite}
+.a-shield svg{animation:glowp 2.6s ease-in-out infinite}
+.a-pause svg .bar{animation:blink 2.2s ease-in-out infinite}
+.a-eye svg{animation:look 4s ease-in-out infinite}
+.a-swap svg{animation:swap 2.4s ease-in-out infinite}
+.a-spin svg{animation:spin 4s linear infinite}
+.a-pulse svg path{stroke-dasharray:40;animation:beat 2s linear infinite}
+@keyframes swap{50%{transform:scaleX(-1)}}
+@keyframes beat{0%{stroke-dashoffset:40}60%,100%{stroke-dashoffset:0}}
+@keyframes bob{50%{transform:translateY(-3px)}}
+@keyframes dash{to{stroke-dashoffset:-16}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes glowp{50%{filter:drop-shadow(0 0 6px rgba(56,161,255,.9))}}
+@keyframes blink{50%{opacity:.35}}
+@keyframes look{0%,40%,100%{transform:translateX(0)}20%{transform:translateX(-2px)}60%{transform:translateX(2px)}}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chips span{font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--panel2);color:var(--sub)}
+
+/* 功能下面：客户端截图轮播(PM 10-23)。上面一排标签，当前标签有进度条；图片淡入切换；自动播放，鼠标停在上面暂停，手机可左右滑 */
+.shots{margin-top:56px}
+.shot-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:22px}
+.shot-tabs button{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--panel);color:var(--sub);font:600 14px var(--sans);padding:9px 16px;border-radius:999px;cursor:pointer;transition:color .3s,border-color .3s,background .3s}
+.shot-tabs button:hover{color:var(--ink)}
+.shot-tabs button.on{color:var(--ink);border-color:rgba(56,161,255,.5);background:rgba(56,161,255,.1)}
+.shot-tabs button i{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--glow)}
+.shot-tabs button.on i{animation:fill var(--dur,5s) linear forwards}
+.shots.paused .shot-tabs button.on i{animation-play-state:paused}
+@keyframes fill{to{width:100%}}
+.frame{position:relative;max-width:920px;margin:0 auto;border-radius:16px;padding:10px;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.03));border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(56,161,255,.06);touch-action:pan-y}
+.frame::before{content:'';position:absolute;inset:-40px -60px;background:radial-gradient(closest-side,rgba(56,161,255,.14),transparent);z-index:-1;pointer-events:none}
+.stage{position:relative;aspect-ratio:1600/1088;border-radius:9px;overflow:hidden;background:#EEF2F6}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transform:scale(1.02);transition:opacity .6s ease,transform 1.2s ease}
+.stage img.on{opacity:1;transform:none}
+.shot-cap{text-align:center;margin-top:18px;color:var(--sub);font-size:15.5px;min-height:28px;transition:opacity .3s}
+.shot-cap b{color:var(--ink)}
+.arr{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(5,11,26,.75);color:var(--ink);font-size:20px;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(6px);transition:background .2s}
+.arr:hover{background:rgba(56,161,255,.25)}
+.arr.l{left:-21px}.arr.r{right:-21px}
+@media(max-width:640px){.arr{display:none}.shot-tabs button{font-size:13px;padding:7px 12px}}
+
+/* 网页版一键检测 */
+.wc{margin-top:36px;border:1px solid var(--line);border-radius:20px;background:var(--panel);padding:24px}
+.wc-head{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.wc-sum{color:var(--sub);font-size:15.5px}
+.wc-sum.bad{color:var(--amber);font-weight:600}.wc-sum.good{color:var(--glow2);font-weight:600}
+.wc-list{list-style:none;padding:0;margin:20px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:760px){.wc-list{grid-template-columns:1fr}}
+.wc-list li{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+.wc-list li i{flex:none;width:10px;height:10px;border-radius:50%;margin-top:7px;background:rgba(255,255,255,.2)}
+.wc-list li div{flex:1;min-width:0}
+.wc-list li b{display:block;font-size:15px}
+.wc-list li span{display:block;color:var(--mute);font-size:13.5px;margin-top:2px;word-break:break-all}
+.wc-list li em{font-style:normal;font-size:13px;font-weight:600;color:var(--mute);white-space:nowrap;margin-top:2px}
+.wc-list li.run i{background:var(--glow);animation:blink 1s ease-in-out infinite}.wc-list li.run em{color:var(--glow2)}
+.wc-list li.ok i{background:#3DDC97}.wc-list li.ok em{color:#3DDC97}
+.wc-list li.warn i{background:var(--amber)}.wc-list li.warn em{color:var(--amber)}
+.wc-list li.skip i{background:rgba(255,255,255,.2)}
+.wc-cta{margin:18px 0 0;color:var(--ink);font-size:15px}
+.wc-cta a{color:var(--glow2);font-weight:600}
+.wc-note{margin:14px 0 0;color:var(--mute);font-size:12.5px}
+.wc-note a{color:var(--sub)}
+
+/* ③ 对比 */
+.cmp{margin-top:44px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.cmp table{width:100%;border-collapse:collapse;font-size:15px}
+.cmp th,.cmp td{padding:16px 18px;text-align:center;border-bottom:1px solid var(--line)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp th{font-size:14px;color:var(--sub);font-weight:600;background:rgba(255,255,255,.03)}
+.cmp td:first-child,.cmp th:first-child{text-align:left}
+.cmp .us{background:rgba(56,161,255,.07);color:var(--ink)}
+.cmp th.us{color:var(--glow2)}
+.mk{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font-weight:700;font-size:14px}
+.mk.y{background:rgba(56,161,255,.18);color:var(--glow2)}
+.mk.n{background:rgba(255,255,255,.06);color:var(--mute)}
+.mk.s{width:auto;white-space:nowrap;padding:0 10px;border-radius:999px;background:rgba(242,180,90,.14);color:var(--amber);font-size:12.5px;font-weight:600}
+.js .cmp .mk{opacity:0;transform:scale(.4);transition:opacity .4s,transform .5s cubic-bezier(.3,1.6,.5,1)}
+.cmp.in .mk{opacity:1;transform:none}
+.short{display:none}
+@media(max-width:640px){.full{display:none}.short{display:inline}.cmp table{font-size:13.5px}.cmp th,.cmp td{padding:12px 6px}.cmp td:first-child,.cmp th:first-child{padding-left:14px}.mk{width:22px;height:22px;font-size:12px}.mk.s{padding:0 7px;font-size:11.5px}}
+
+/* ④ 价格 */
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:44px;align-items:stretch}
+@media(max-width:860px){.prices{grid-template-columns:1fr;max-width:440px}}
+.price{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:30px 26px;position:relative;transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+.price:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.price .name{color:var(--sub);font-weight:600}
+.price .amt{font-size:44px;font-weight:800;margin:10px 0 2px;letter-spacing:-.02em}
+.price .amt small{font-size:16px;font-weight:500;color:var(--mute)}
+.price .per{color:var(--mute);font-size:13.5px;min-height:22px}
+.price ul{list-style:none;padding:0;margin:20px 0 26px;display:grid;gap:10px;font-size:15px;color:var(--sub)}
+.price li{display:flex;gap:10px}
+.price li::before{content:"✓";color:var(--glow);font-weight:700}
+.price .btn{margin-top:auto;justify-content:center}
+.price .alt{color:var(--sub);font-size:13.5px;margin-top:6px}
+.price[hidden],.trial[hidden],.trial-pill[hidden]{display:none}
+.noip{margin-top:14px;font-size:14.5px;color:var(--sub)}
+.noip a{color:var(--glow2);font-weight:600}
+.noip [hidden],.trial-pill [hidden]{display:none}
+.price .founder{margin-top:8px;padding:6px 10px;border-radius:10px;background:rgba(242,180,90,.14);color:var(--amber);font-size:13.5px;font-weight:600}
+.price .who{color:var(--glow2);font-size:13.5px;font-weight:600;margin-top:4px}
+.price.best{border-color:transparent;background:linear-gradient(var(--bg2),var(--bg2)) padding-box,conic-gradient(from var(--a,0deg),rgba(56,161,255,.15),var(--glow),rgba(143,208,255,.2),rgba(56,161,255,.15)) border-box;border:1.5px solid transparent;animation:spinb 6s linear infinite}
+.price.best .badge{position:absolute;top:-12px;right:22px;background:var(--glow);color:#04122E;font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:999px}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes spinb{to{--a:360deg}}
+.refund{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:6px 14px;border-radius:999px;font-size:14px;font-weight:600;color:var(--ink);background:rgba(56,161,255,.1);border:1px solid rgba(56,161,255,.3)}
+.refund a{color:var(--glow2);font-weight:500;text-decoration:none}
+/* 下载弹窗(PM 10-25):Windows 下载后的安装说明;Mac 留邮箱;手机提示到电脑上打开 */
+.dlm{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(2,6,16,.72);backdrop-filter:blur(4px)}
+.dlm.on{display:flex}
+.dlm-box{position:relative;width:min(560px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#0D1A36;border:1px solid var(--line);border-radius:20px;padding:26px 26px 22px;color:var(--ink);text-align:left}
+.dlm-box h3{margin:0 0 6px;font-size:21px}
+.dlm-box>p{margin:0 0 14px;color:var(--sub);font-size:14.5px;line-height:1.7}
+.dlm-x{position:absolute;top:12px;right:14px;width:32px;height:32px;border:0;border-radius:50%;background:var(--panel2);color:var(--ink);font-size:18px;cursor:pointer}
+.dlm-step{display:flex;gap:12px;margin-top:14px}
+.dlm-step b.n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--glow);color:#04122E;font-size:13px;display:inline-flex;align-items:center;justify-content:center}
+.dlm-step div{flex:1;min-width:0;font-size:14.5px;line-height:1.65}
+.dlm-step small{display:block;color:var(--sub);font-size:13px}
+.mock{margin-top:8px;border-radius:8px;padding:12px 14px;font-size:12.5px;line-height:1.55}
+.mock.ss{background:#1F5FA8;color:#fff}
+.mock.ss b{display:block;font-size:15px;margin-bottom:4px}
+.mock .hl{display:inline-block;padding:1px 6px;border-radius:4px;outline:2px solid var(--amber);outline-offset:1px}
+.mock .row{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
+.mock .bt{padding:4px 12px;border:1px solid rgba(255,255,255,.6);border-radius:3px}
+.mock.av{background:#fff;color:#1f2937}
+.mock.av .bt{border-color:#cbd5e1}
+.dlm-form{display:flex;gap:8px;margin-top:6px}
+.dlm-form input{flex:1;min-width:0;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font-size:15px}
+.dlm-ok{margin-top:10px;font-size:14px;color:var(--glow2)}
+.dlm-url{display:flex;gap:8px;align-items:center;margin-top:8px;padding:10px 14px;border-radius:12px;background:var(--panel2);font-size:15px}
+.dlm-url span{flex:1;font-weight:600}
+
+.trial{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:36px;padding:24px 28px;border-radius:18px;background:linear-gradient(120deg,rgba(56,161,255,.16),rgba(143,208,255,.05));border:1px solid rgba(56,161,255,.4);text-align:left}
+.trial h3{margin:0;font-size:21px}
+.trial p{margin:6px 0 0;color:var(--sub);font-size:14.5px;line-height:1.7}
+.trial .btn{flex:none}
+@media(max-width:860px){.trial{flex-direction:column;align-items:flex-start}}
+.fine{color:var(--mute);font-size:13.5px;margin-top:16px;max-width:820px}
+
+/* ⑤ 使用方法 */
+.must{display:flex;gap:16px;align-items:flex-start;margin-top:30px;padding:20px 24px;border-radius:16px;background:linear-gradient(135deg,rgba(242,180,90,.16),rgba(242,180,90,.06));border:1px solid rgba(242,180,90,.55);box-shadow:0 0 0 4px rgba(242,180,90,.06);animation:mustGlow 2.8s ease-in-out infinite}
+.must-ico{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(242,180,90,.2);color:var(--amber)}
+.must-ico svg{width:22px;height:22px}
+.must b{display:block;color:var(--amber);font-size:16.5px;margin-bottom:6px}
+.must ol{margin:0;padding-left:20px;color:var(--sub);font-size:15px;display:grid;gap:4px}
+.must strong{color:var(--ink)}
+@keyframes mustGlow{50%{box-shadow:0 0 0 6px rgba(242,180,90,.12)}}
+.steps{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:54px}
+.steps .rail{position:absolute;left:24px;right:24px;top:23px;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.steps .rail i{display:block;height:100%;width:var(--p,0%);background:linear-gradient(90deg,var(--glow),var(--glow2));transition:width .15s linear}
+.step .num{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font:700 18px var(--mono);background:var(--bg);border:2px solid var(--line);position:relative;z-index:1;transition:border-color .4s,background .4s,color .4s}
+.step.done .num{border-color:var(--glow);background:var(--glow);color:#04122E}
+.step h3{font-size:19px;margin:20px 0 8px}
+.step p{margin:0;color:var(--sub);font-size:15px}
+@media(max-width:760px){.steps{grid-template-columns:1fr}.steps .rail{left:23px;right:auto;width:2px;top:24px;bottom:24px;height:auto}.steps .rail i{width:100%;height:var(--p,0%)}.step{padding-left:70px;position:relative}.step .num{position:absolute;left:0;top:0}.step h3{margin-top:8px}}
+
+/* 常见问题 */
+.faq{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+@media(max-width:760px){.faq{grid-template-columns:1fr}}
+.faq details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:4px 20px}
+.faq summary{cursor:pointer;padding:14px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+.faq summary::after{content:"+";color:var(--glow);font-size:20px;line-height:1;transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 16px;color:var(--sub)}
+
+/* 结尾 */
+.final{text-align:center;padding:120px 0 90px;overflow:hidden}
+.final::before{content:"";position:absolute;left:50%;top:40%;width:720px;height:420px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(56,161,255,.18),transparent);pointer-events:none}
+.final .lead{margin-left:auto;margin-right:auto}
+.final .cta{justify-content:center}
+
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mute);font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{text-decoration:none;margin-left:18px}
+footer a:hover{color:var(--ink)}
+
+.chat{position:fixed;right:20px;bottom:20px;z-index:30;display:flex;align-items:center;gap:8px;background:var(--glow);color:#04122E;font-weight:600;font-size:14px;padding:10px 16px;border-radius:999px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.chat svg{width:18px;height:18px}
+dialog.wx{border:0;border-radius:18px;padding:28px 30px;text-align:center;background:#fff;color:#0E1A18}
+dialog.wx::backdrop{background:rgba(0,0,0,.55)}
+dialog.wx h3{margin:0 0 12px}
+dialog.wx p{margin:10px 0 0;color:#6B7772;font-size:14px}
+dialog.wx{position:fixed;inset:auto 20px 20px auto;margin:0;width:440px;max-width:calc(100vw - 40px);height:min(720px,calc(100vh - 40px));box-sizing:border-box;padding:0;border:0;border-radius:16px;overflow:hidden;background:#F4F5F8;color:#1F2937;text-align:left;box-shadow:0 12px 40px rgba(15,40,80,.3);flex-direction:column;z-index:60}
+dialog.wx[open]{display:flex}
+.chat-head{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#0A66DD;color:#fff;flex:none}
+.chat-avatar{width:36px;height:36px;border-radius:50%;background:#fff;color:#0A66DD;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none}
+.chat-who{min-width:0;flex:1;display:flex;flex-direction:column}
+.chat-who b{font-size:15px;line-height:20px}
+.chat-who>span{font-size:12px;line-height:16px;display:flex;align-items:center;gap:5px;opacity:.92}
+.chat-dot{width:8px;height:8px;border-radius:50%;background:#C4CDD9;flex:none}
+.chat-dot.on{background:#34D399}
+.chat-list{flex:1;min-height:0;overflow-y:auto;padding:14px;background:#EDEDED}
+/* 仿微信(11-04):灰底,对方白泡泡、自己绿泡泡,带小尖角和头像 */
+.chat-m{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:10px;row-gap:3px;margin-bottom:14px;justify-items:start}
+.chat-m.me{grid-template-columns:minmax(0,1fr) 36px;justify-items:end}
+.chat-m>*{grid-column:2}
+.chat-m.me>*{grid-column:1}
+.chat-m>.chat-av{grid-column:1;grid-row:1/span 3;width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#fff;background:#8C96A3;object-fit:cover}
+.chat-m>img.chat-av{background:none}
+.chat-m.me>.chat-av{grid-column:2}
+.chat-m>div{position:relative;max-width:82%;background:#fff;color:#191919;border-radius:6px;padding:8px 12px;font-size:14.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word;box-sizing:border-box}
+.chat-m>div::before{content:'';position:absolute;top:12px;left:-4px;width:9px;height:9px;background:inherit;transform:rotate(45deg)}
+.chat-m.me>div{background:#95EC69}
+.chat-m.me>div::before{left:auto;right:-4px}
+.chat-m>div.pic{background:none;padding:0}
+.chat-m>div.pic::before{display:none}
+.chat-m img{display:block;max-width:100%;max-height:240px;border-radius:6px;cursor:zoom-in}
+.chat-lb{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.85);overflow:auto;cursor:zoom-out;display:flex;padding:24px;box-sizing:border-box}
+.chat-lb img{margin:auto;max-width:100%;border-radius:6px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.chat-t{font-size:12px;color:#9A9A9A;text-align:center;margin:4px 0 10px}
+.chat-n{font-size:12px;color:#5F6B7A;margin-top:3px;background:none;border:0;padding:0;font-family:inherit}
+button.chat-n{cursor:pointer;text-decoration:underline}
+.chat-c{font-size:12px;color:#5F6B7A;text-align:center;margin:6px 0}
+.chat-box{display:flex;align-items:flex-end;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid #E5E9F0;flex:none}
+#contact [hidden]{display:none}
+#chat-text{flex:1;min-width:0;border:1px solid #D3DBE6;border-radius:18px;padding:7px 14px;box-sizing:border-box;font:inherit;font-size:14px;line-height:20px;resize:none;outline:none;overflow:hidden;max-height:96px;background:#F7F9FC;color:#1F2937}
+#chat-text:focus{border-color:#0A66DD}
+.chat-pic{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#5F6B7A;background:#F1F4F8;cursor:pointer;flex:none}
+.chat-send{width:36px;height:36px;border-radius:50%;border:0;background:#0A66DD;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+/* 输入区、引用、文件、表情(PM 11-04) */
+dialog.wx{position:fixed}
+.chat-box{position:relative;display:block;padding:8px 10px 10px;border-top:1px solid #E5E9F0}
+.chat-box #chat-text{display:block;width:100%;border:0;border-radius:0;padding:6px 8px;background:none;outline:none}
+.chat-tools{display:flex;align-items:center;gap:2px}
+.chat-tool{width:32px;height:32px;border:0;border-radius:6px;background:none;color:#4A4A4A;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:none}
+.chat-tool:hover{background:#F1F4F8}
+.chat-tools .chat-send{width:auto;height:32px;margin-left:auto;padding:0 16px;border-radius:6px;background:#07C160;color:#fff;font:inherit;font-size:13.5px}
+.chat-quote-bar{display:flex;align-items:center;gap:8px;background:#F1F4F8;border-radius:6px;padding:4px 8px;margin-bottom:4px;font-size:12.5px;color:#5F6B7A}
+.chat-quote-bar[hidden]{display:none}
+.chat-quote-bar span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chat-quote-bar button{border:0;background:none;font-size:16px;line-height:16px;cursor:pointer;color:#5F6B7A;padding:0}
+.chat-fc{background:#fff;color:#191919;border-radius:6px;padding:8px 12px;font-size:13.5px;word-break:break-all;cursor:pointer;max-width:82%}
+.chat-q{background:#E2E2E2;color:#5F5F5F;border-radius:4px;padding:3px 8px;font-size:12.5px;line-height:1.45;cursor:pointer;max-width:82%;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.chat-qa{font-size:11.5px;color:#8A8A8A;cursor:pointer;visibility:hidden}
+.chat-m:hover .chat-qa{visibility:visible}
+@media(hover:none){.chat-qa{visibility:visible}}
+.chat-emoji-pop{position:absolute;left:12px;bottom:92px;z-index:5;width:min(320px,calc(100% - 24px));max-height:220px;overflow-y:auto;display:grid;grid-template-columns:repeat(8,1fr);gap:2px;background:#fff;border-radius:10px;box-shadow:0 8px 26px rgba(15,23,42,.2);padding:6px;box-sizing:border-box}
+.chat-emoji-pop[hidden]{display:none}
+.chat-emoji-pop button{border:0;background:none;font-size:18px;line-height:30px;border-radius:6px;cursor:pointer;padding:0}
+.chat-emoji-pop button:hover{background:#F1F4F8}
+.wx-x{border:0;background:none;color:#fff;font-size:22px;line-height:1;cursor:pointer;padding:2px 4px}
+@media(max-width:600px){dialog.wx{inset:0;width:100%;height:100%;height:100dvh;border-radius:0}#chat-text{font-size:16px}}
+
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important}
+ .js .rv{opacity:1;transform:none}
+}
+/* 终身 VIP 创始价:原价划线、缩小、变淡(11-09 官网改版) */
+.amt s.was{font-size:.42em;font-weight:500;opacity:.5;margin-left:10px;vertical-align:middle}
+.trial-pill s{opacity:.6}
+
+/* ==== 11-14 首页按设计稿改版(浅色):上面是原来的样式(免费检测、客服、下载弹窗、地图动画还在用),下面整体换成浅色 ==== */
+:root{
+ --bg:#f2f5fa;--bg2:#eaf2fb;--panel:#fff;--panel2:#e6f0fc;--line:#e5e9f0;
+ --ink:#1f2937;--sub:#374151;--mute:#5f6b7a;
+ --glow:#0a66dd;--glow2:#0857c0;--amber:#8f5d00;--red:#b42d32;--green:#16784b;
+}
+body{background:var(--bg);color:var(--ink)}
+a{color:var(--glow)}
+header{background:#eaf2fb;border-bottom:1px solid var(--line)}
+header.solid{background:rgba(234,242,251,.92);backdrop-filter:blur(12px);border-color:var(--line)}
+.brand{color:var(--ink)}
+nav a{color:var(--sub)}nav a:hover{color:var(--glow)}
+nav .btn,nav .btn.glow{color:#fff}
+.btn{border-radius:8px;padding:12px 22px;border-color:transparent}
+.btn.glow{background:var(--glow);color:#fff;box-shadow:none;animation:none}
+.btn.glow:hover{background:var(--glow2);transform:none;box-shadow:none}
+.n-btn-s{background:#e6f0fc;color:var(--glow)}.n-btn-s:hover{background:#d8e7fa}
+.n-btn-soon{background:#fff;color:var(--mute);cursor:default}
+.n-btn-soon em{font-style:normal;font-size:12px;font-weight:600;margin-left:6px;padding:2px 8px;border-radius:999px;background:#fff4dc;color:#8f5d00}
+h2{font-size:32px;line-height:42px;font-weight:600;margin:0 0 12px}
+@media(max-width:720px){h2{font-size:26px;line-height:36px}}
+.n-sec{padding:80px 0}
+@media(max-width:720px){.n-sec{padding:56px 0}}
+.n-white{background:#fff}
+.n-eyebrow{font-size:13px;font-weight:600;color:var(--glow);letter-spacing:.04em;margin:0 0 8px}
+.n-lead{font-size:16px;line-height:26px;color:var(--mute);margin:0 0 32px;max-width:680px}
+.n-muted,.n-d{color:var(--mute)}
+.n-mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.n-pill{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.n-pill-green{background:#e3f5ec;color:var(--green)}.n-pill-blue{background:#e6f0fc;color:var(--glow);height:20px;padding:0 8px}.n-pill-amber{background:#fff4dc;color:#8f5d00}
+.n-grid{display:grid;gap:16px}
+.n-g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.n-g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.n-g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.n-mt24{margin-top:24px}.n-mb48{margin-bottom:48px}
+.n-card{background:#fff;border-radius:12px;padding:24px}
+.n-white .n-card,.n-soft{background:#f7f9fc}
+.n-card p{margin:0}
+.n-t{font-weight:600;margin:0 0 6px!important}
+.n-card .n-d{font-size:14px;line-height:22px}
+.n-fix{font-size:14px;line-height:22px;color:var(--green);margin-top:12px!important}
+.n-more{margin:24px 0 0;font-size:14px;color:var(--mute)}.n-more a{margin-left:14px}
+.n-small{font-size:13px;color:var(--mute);margin:0 0 12px}
+/* 首屏 */
+.n-hero{padding:calc(136px + var(--nb,0px)) 0 80px;background:linear-gradient(#eaf2fb,#f2f5fa)}
+.n-hero-in{display:flex;flex-wrap:wrap;gap:48px;align-items:center}
+.n-hero-text{flex:1 1 560px;min-width:0}
+.n-hero-text p{margin:0}
+.n-hero h1{font-size:52px;line-height:64px;font-weight:600;margin:20px 0 16px}
+@media(max-width:720px){.n-hero{padding-top:calc(104px + var(--nb,0px))}.n-hero h1{font-size:36px;line-height:46px}}
+.n-sub{font-size:20px;line-height:32px;color:var(--sub);margin:0 0 8px!important}
+.n-hero .n-muted{margin:0 0 32px!important}
+.n-cta{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 12px}
+.n-center{justify-content:center}
+.n-heroprice{font-size:14px;color:var(--sub)}
+.n-hero-shot{flex:1 1 460px;min-width:0}
+.n-win{background:#fff;border-radius:12px;box-shadow:0 12px 40px rgba(15,40,80,.18);overflow:hidden}
+.n-win img{display:block;width:100%;height:auto}
+.n-vid-wrap{max-width:960px}
+.n-vid{position:relative;max-width:920px;aspect-ratio:16/9;background:#0b1626;border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(15,40,80,.18)}
+.n-vid-play{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;position:relative}
+.n-vid-play img{display:block;width:100%;height:100%;object-fit:cover}
+.n-vid-btn{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:rgba(10,102,221,.92);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.3);transition:transform .15s}
+.n-vid-btn svg{width:34px;height:34px;margin-left:3px}
+.n-vid-play:hover .n-vid-btn,.n-vid-play:focus-visible .n-vid-btn{transform:scale(1.08)}
+.n-vid-len{position:absolute;right:12px;bottom:12px;padding:2px 8px;border-radius:6px;background:rgba(0,0,0,.65);color:#fff;font-size:13px}
+.n-vid iframe,.n-vid video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.n-vid-alt{max-width:920px;text-align:left!important;font-size:13px!important}
+.n-vid-h{font-size:20px;margin:48px 0 8px}
+@media(max-width:720px){.n-vid-btn{width:60px;height:60px;margin:-30px 0 0 -30px}.n-vid-h{margin-top:36px}}
+.n-cap{font-size:12px;color:var(--mute);margin:8px 0 0!important;text-align:center}
+/* 地图动画保持深色(原来的样式按深色写的) */
+.geo{--panel:rgba(255,255,255,.04);--panel2:rgba(255,255,255,.07);--line:rgba(255,255,255,.09);--ink:#EAF1FA;--sub:rgba(234,241,250,.72);--mute:rgba(234,241,250,.5);--glow:#38A1FF;--glow2:#8FD0FF;--amber:#F2B45A;
+ background-color:#0A1530;color:var(--ink);max-width:none;margin:0}
+/* 免费检测 */
+.wc{background:#f7f9fc;border:0;border-radius:12px;margin-top:0}
+.wc-list{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.wc-list li{background:#fff;border:1px solid var(--line)}
+.wc-list li i{background:#d3dbe6}
+.wc-list li.ok i{background:var(--green)}.wc-list li.ok em{color:var(--green)}
+.wc-list li.skip i{background:#d3dbe6}
+.wc-sum.good{color:var(--green)}
+/* 它怎么工作 */
+.n-flow{display:flex;flex-direction:column;gap:20px}
+.n-flow-row{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
+.n-node{flex:1 1 180px;background:#f7f9fc;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:2px}
+.n-node-wide{flex:1 1 220px;gap:8px}
+.n-node-green{background:#e3f5ec}.n-node-green .n-k,.n-node-green .n-d{color:var(--green)}
+.n-k{font-size:12px;color:var(--mute)}
+.n-node .n-d{font-size:13px;line-height:20px}
+.n-node .n-t{margin:0!important}
+.n-opt{background:#fff;border-radius:6px;padding:8px 10px}
+.n-opt-on{box-shadow:inset 0 0 0 1.5px var(--glow)}
+.n-opt .n-t{font-size:15px;line-height:22px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.n-arrow{display:flex;align-items:center;color:#9ca3af;font-size:20px}
+.n-flow-foot{font-size:14px;color:var(--sub);border-top:1px solid var(--line);padding-top:16px}
+/* 截图 */
+.n-fig{margin:0}
+.n-fig figcaption{margin-top:12px;font-size:14px}.n-fig figcaption span{color:var(--mute)}
+/* 28 项 */
+.n-n{font-size:12px;font-weight:600;color:var(--glow);background:#e6f0fc;border-radius:999px;padding:1px 8px;margin-left:4px}
+.n-ul{margin:8px 0 0;padding-left:18px;font-size:14px;line-height:24px;color:var(--sub)}
+/* 对比 */
+.n-tablebox{overflow-x:auto;padding:8px}
+table.n-cmp{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+table.n-cmp th,table.n-cmp td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left}
+table.n-cmp tr:last-child td{border-bottom:0}
+table.n-cmp th{font-size:13px;color:var(--mute);font-weight:600}
+table.n-cmp .c{text-align:center}
+table.n-cmp th.n-us{color:var(--glow)}
+.yes{color:var(--green);font-weight:600}.no{color:var(--red)}.mid{color:#8f5d00}
+/* 价格 */
+.n-price{display:flex;flex-direction:column;gap:8px}
+.n-price .btn{align-self:flex-start;margin-top:12px}
+.n-pt{font-weight:600;font-size:20px;line-height:28px}
+.n-amt{font-size:34px;line-height:40px;font-weight:600}
+.n-was{color:var(--mute);font-size:16px}
+.n-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.n-price-best{box-shadow:inset 0 0 0 2px var(--glow)}
+.n-fine{margin:20px 0 0;font-size:13px;line-height:22px;color:var(--mute);max-width:820px}
+/* 三步 */
+.n-num{font-family:var(--mono);color:var(--glow);font-weight:600;margin:0 0 8px!important}
+/* FAQ */
+.n-narrow{max-width:800px}
+.n-faq{display:flex;flex-direction:column;gap:8px;margin:24px 0}
+.n-faq details{background:#fff;border-radius:12px;padding:0 24px}
+.n-faq summary{cursor:pointer;font-weight:600;padding:18px 0;list-style:none}
+.n-faq summary::-webkit-details-marker{display:none}
+.n-faq summary::after{content:"+";float:right;color:var(--glow);font-weight:600}
+.n-faq details[open] summary::after{content:"−"}
+.n-faq details p{margin:0 0 18px;color:var(--sub);font-size:15px;line-height:25px}
+/* 结尾 */
+.n-final{background:#1f2937;color:#fff;text-align:center;padding:80px 0}
+.n-final h2{color:#fff}
+.n-final>.wrap>p{margin:0 0 32px;color:#d3dbe6}
+.n-final .btn.glow{background:#0a66dd}
+.n-final .n-final-note{font-size:14px;color:#d3dbe6;margin:16px 0 0;line-height:26px}
+.n-final a{color:#8fc1ff}
+.n-final .btn.glow{color:#fff}
+.n-footer{padding:32px 0;font-size:13px;color:var(--mute);background:var(--bg);border:0}
+.n-footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.n-links{display:flex;gap:16px;flex-wrap:wrap}.n-links a{color:var(--mute)}
+[hidden]{display:none!important}
+/* 邀请链接提示条(推荐返现 11-14) */
+.n-refbar{position:fixed;top:64px;left:0;right:0;z-index:19;background:#fff4dc;color:#5c3d00;font-size:14px;border-bottom:1px solid #f1dfb0}
+.n-refbar .wrap{display:flex;align-items:center;justify-content:center;gap:12px;min-height:44px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.n-refbar button{border:0;border-radius:6px;background:#8f5d00;color:#fff;font:inherit;font-weight:600;padding:5px 12px;cursor:pointer}
+/* 截图轮播:一次一张大图(PM 11-14「图片太小」) */
+.shots{margin-top:8px}
+.shot-tabs button{background:#f7f9fc;color:var(--sub);border-color:var(--line)}
+.shot-tabs button.on{background:#e6f0fc;color:var(--glow);border-color:#b9d4f6}
+.frame{max-width:1080px;background:#fff;border-color:var(--line);box-shadow:0 18px 50px rgba(15,40,80,.16)}
+.frame::before{display:none}
+.arr{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:0 4px 14px rgba(15,40,80,.12)}
+.shot-cap{color:var(--sub)}
+.shot-cap b{color:var(--ink)}
+/* 支持的设备(11-14 Mac 同步上线) */
+.n-plat{list-style:none;padding:0;margin:4px 0 20px;display:flex;flex-wrap:wrap;gap:8px}
+.n-plat li{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:14px;font-weight:600;color:var(--sub)}
+.n-plat svg{width:16px;height:16px}
+.btn svg{width:18px;height:18px}
+.n-btn-dark{background:#1f2937;color:#fff;cursor:pointer;font:inherit;font-weight:600}.n-btn-dark:hover{background:#111827}
+.n-btn-light{background:#fff;color:#1f2937;cursor:pointer;font:inherit;font-weight:600}
+.n-macbtns{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 4px}
+/* 弹窗、客服按钮换浅色 */
+.dlm{background:rgba(15,40,80,.45)}
+.dlm-box{background:#fff;border-color:var(--line);color:var(--ink)}
+.dlm-step b.n{background:var(--glow);color:#fff}
+.chat{background:var(--glow);color:#fff}
+</style>
+<style>@font-face{font-family:MiSans;src:url('assets/misans.woff2') format('woff2');font-display:swap}body{font-family:MiSans,system-ui,sans-serif}.rv{opacity:1!important;transform:none!important;visibility:visible!important}.btn,button,.leyra-action{background:#ae390e!important;border-color:#ae390e!important;color:#fff!important;text-decoration:none!important}.btn:hover,button:hover,.leyra-action:hover{background:#922b07!important}.leyra-action{display:inline-block;border:0;border-radius:8px;padding:11px 17px;font:inherit;cursor:pointer}.leyra-platform{margin:18px 0;background:#fff0e5;color:#713010;padding:12px 16px;border-radius:8px}</style><script defer="True" src="assets/site.js"></script><link href="assets/leyra-orange-104.jpeg" rel="icon" type="image/jpeg"/><style>
+.brand .leyra-brand-logo { display:block; width:36px; height:36px; flex:none; object-fit:cover; border-radius:8px; border:0; box-shadow:none; }
+.brand { display:inline-flex; align-items:center; gap:9px; }
+.leyra-action:focus-visible,.btn:focus-visible,button:focus-visible {outline:3px solid #963105;outline-offset:3px}
+</style><style>.chat{background:#ae390e!important;color:#fff!important}.chat:hover{background:#922b07!important}</style><script defer="True" src="assets/leyra-showcase-104.js"></script></head>
+<body>
+<header id="top"><div class="wrap">
+<a class="brand" href="#"><img alt="" class="leyra-brand-logo" height="36" src="assets/leyra-orange-104.jpeg" width="36"/>Leyra</a>
+<nav><a href="#features">功能</a><a href="#pricing">价格</a><a href="#get">下载</a><a href="#check">免费检测</a><a href="docs/">文档库</a><a class="acct" href="account/" id="nav-acct">登录</a><a class="btn glow" href="#get">免费试用 1 天</a></nav>
+</div></header>
+<main>
+<section class="n-hero">
+<div class="wrap n-hero-in">
+<div class="n-hero-text">
+<p class="rv"><span class="n-pill n-pill-green">Leyra 1.1.3 · Mac</span></p>
+<h1 class="rv d1">长期稳定地用 Claude</h1><p class="leyra-platform">目前支持 Apple 芯片 Mac。Windows 和手机版本待实测通过后开放。</p>
+<p class="n-sub rv d1">让 Claude 每次看到的都是同一个你。</p>
+<ul aria-label="支持的设备" class="n-plat rv d2"><li><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8C7 7.4 5.6 8.3 4.8 9.7c-1.6 2.8-.4 6.9 1.2 9.2.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2-1.1 2.8-2.3.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.6-1-2.6-3.7zM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2.1-.5 2.7-1.3z"></path></svg>Mac</li></ul>
+<p class="n-muted rv d2">节点用你自己的工具，我们只管 AI 出口：Claude 只从你的独享 IP 出去，出口不对就先拦住，其他网站照常。</p>
+<div class="n-cta rv d2">
+<a class="btn n-btn-dark" data-mac="hero" href="https://client-api.leyra.xin/downloads/desktop/Leyra-macOS-arm64.dmg"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8C7 7.4 5.6 8.3 4.8 9.7c-1.6 2.8-.4 6.9 1.2 9.2.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2-1.1 2.8-2.3.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.6-1-2.6-3.7zM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2.1-.5 2.7-1.3z"></path></svg>下载 Mac 版</a>
+<a class="btn n-btn-s" href="#check">先免费检测</a>
+</div>
+<p class="n-small rv d3">目前提供 Apple 芯片 Mac 安装包</p>
+</div>
+<div class="n-hero-shot rv d2">
+<div class="n-win"><img alt="Leyra 1.0.4 首页：实时守护、独享出口核对" height="980" src="img/leyra-104-home.webp" width="1440"/></div>
+<p class="n-cap">Leyra 1.0.4 界面 · 演示账号及示例 IP</p>
+</div>
+</div>
+</section>
+<section class="n-sec" id="pains">
+<div class="wrap">
+<p class="n-eyebrow rv">为什么会被封</p>
+<h2 class="rv d1">你的 Claude 总是被封号，知道为什么吗？</h2>
+<p class="n-lead rv d2">很多时候问题出在网络环境上。最常见的是这四种。</p>
+<div aria-label="线路示意：比较普通节点的动态出口和 Leyra 的固定独享出口" class="geo rv d2" id="geo">
+<svg role="img" viewbox="0 0 1000 470">
+<defs>
+<lineargradient id="ggl" x1="0" x2="1"><stop offset="0" stop-color="#38A1FF" stop-opacity=".5"></stop><stop offset="1" stop-color="#8FD0FF"></stop></lineargradient>
+<filter id="gbl"><fegaussianblur stddeviation="4"></fegaussianblur></filter>
+</defs>
+<g id="geo-land"></g>
+<g id="geo-arcs"></g>
+<g id="geo-cities"></g>
+<g id="geo-pins"></g>
+</svg>
+<div class="geo-bar">
+<div aria-label="线路示意切换" class="geo-sw" role="group"><button class="b on" data-m="bad" type="button">普通节点</button><button class="g" data-m="good" type="button">Leyra</button></div>
+<div class="geo-seen">Claude 看到的你：<b class="bad" id="geo-ip">198.51.100.23 · 东京</b><span class="tip" id="geo-tip">IP 反复横跳，增加账号被封号的风险</span></div>
+</div>
+</div>
+<div class="n-grid n-g4 n-mt24">
+<div class="n-card rv"><p class="n-t">IP 反复横跳</p><p class="n-d">一会儿东京、一会儿新加坡。</p><p class="n-fix">→ 出口固定成你的独享 IP，不随节点变</p></div>
+<div class="n-card rv d1"><p class="n-t">和陌生人共用 IP</p><p class="n-d">一个 IP 很多人用，别人出事你受牵连。</p><p class="n-fix">→ 用你自己买的独享 IP，只有你在用</p></div>
+<div class="n-card rv d2"><p class="n-t">真实网络露出来</p><p class="n-d">节点一断，或 DNS、WebRTC 漏了。</p><p class="n-fix">→ 全部接管；没确认安全就先拦截 Claude</p></div>
+<div class="n-card rv d3"><p class="n-t">一个号几处登录</p><p class="n-d">网页一个出口、Claude Code 另一个。</p><p class="n-fix">→ 网页、桌面端、Claude Code 都走同一个 IP</p></div>
+</div>
+<p class="n-more rv">想了解更多：<a href="docs/three-factors/">稳定使用 AI 的三个要素</a><a href="docs/getting-started/">新手路线：从安装到稳定使用</a><a href="docs/desktop-coverage/">哪些流量能管住，哪些管不住</a><a href="docs/network-faq/">网络常见问题</a></p>
+</div>
+</section>
+<section class="n-sec n-white" id="check">
+<div class="wrap">
+<p class="n-eyebrow rv">免费检测</p>
+<h2 class="rv d1">测一测，Claude 现在看到的你</h2>
+<p class="n-lead rv d2">打开「诊断与记录」核对实际出口、IPv6、WebRTC 和 DNS。</p>
+<div class="wc rv d2" id="wc">
+<div class="wc-head">
+<a class="btn glow" href="docs/desktop-checks/">查看检测方法</a>
+<span class="wc-sum" id="wc-sum">使用 Mac 客户端可检查以下项目</span>
+</div>
+<ul class="wc-list">
+<li data-k="ip"><i></i><div><b>出口 IP 在哪里</b><span>Claude 看到的你在哪个国家</span></div><em>未检测</em></li>
+<li data-k="v6"><i></i><div><b>IPv6 有没有绕开</b><span>能不能不经节点直接连出去</span></div><em>未检测</em></li>
+<li data-k="rtc"><i></i><div><b>WebRTC 有没有漏</b><span>网页能不能看到你另一个地址</span></div><em>未检测</em></li>
+<li data-k="dns"><i></i><div><b>DNS 有没有泄露</b><span>访问记录会不会从本地漏出去</span></div><em>未检测</em></li>
+</ul>
+<p class="wc-cta" hidden="" id="wc-cta">有问题？<a href="#get">下载客户端</a>，这几项会被一次接管，Claude 每次看到的都是你的同一个独享 IP。</p>
+<p class="wc-note">这个检测看不出「IP 有多少人共用、会不会自动切换」，那要靠一个只给你用的独享 IP 才能保证。IP 所在地数据来自 <a href="https://db-ip.com" rel="noopener">DB-IP.com</a>。</p>
+</div>
+</div>
+</section>
+<section class="n-sec" id="how">
+<div class="wrap">
+<p class="n-eyebrow rv">它怎么工作</p>
+<h2 class="rv d1">节点怎么来都行，我们只管 AI 出口</h2>
+<p class="n-lead rv d2">推荐把节点订阅复制进客户端，节点和出口在一处管理；订阅复制不出来，也可以直接用你现在的节点工具。之后都接到你的独享 IP。</p>
+<div class="n-card n-flow rv d2">
+<div class="n-flow-row">
+<div class="n-node"><p class="n-k">起点</p><p class="n-t">你的电脑</p><p class="n-d">Claude 网页 / 桌面端 / Claude Code</p></div>
+<div aria-hidden="true" class="n-arrow">→</div>
+<div class="n-node n-node-wide"><p class="n-k">第一跳 · 二选一</p>
+<div class="n-opt n-opt-on"><p class="n-t">复制节点订阅进来<span class="n-pill n-pill-blue">推荐</span></p><p class="n-d">在客户端里管理节点，不用再开别的软件</p></div>
+<div class="n-opt"><p class="n-t">用你现在的工具</p><p class="n-d">订阅复制不出来时用：Clash Verge、v2rayN 等开着就行</p></div>
+</div>
+<div aria-hidden="true" class="n-arrow">→</div>
+<div class="n-node n-node-green"><p class="n-k">出口 · 我们只管这一段</p><p class="n-t">你的独享 IP</p><p class="n-d n-mono">203.0.113.••• · 美国</p></div>
+<div aria-hidden="true" class="n-arrow">→</div>
+<div class="n-node"><p class="n-k">终点</p><p class="n-t">Claude</p><p class="n-d">每次看到同一个你</p></div>
+</div>
+<p class="n-flow-foot">其他网站照常走你原来的网络。独享 IP 连不上时，先拦截 Claude，不会让它从别的出口出去。</p>
+</div>
+</div>
+</section>
+<section class="n-sec n-white" id="features">
+<div class="wrap">
+<p class="n-eyebrow rv">装好之后</p>
+<h2 class="rv d1">一眼看清：Claude 现在走的是不是你的 IP</h2>
+<p class="n-lead rv d2">每项检查都写清楚是谁的问题、一句人话、一个按钮。</p>
+<div class="shots n-mb48 rv" id="shots">
+<div aria-label="客户端截图切换" class="shot-tabs" role="group">
+<button class="on" data-i="0" type="button">实时守护<i></i></button>
+<button data-i="1" type="button">线路不对先拦截<i></i></button>
+<button data-i="2" type="button">诊断与记录<i></i></button>
+<button data-i="3" type="button">节点<i></i></button>
+<button data-i="4" type="button">分流规则<i></i></button>
+</div>
+<div class="frame">
+<div class="stage">
+<img alt="Leyra 1.0.4 首页：实时守护、独享出口核对" class="on" height="980" src="img/leyra-104-home.webp" width="1440"/>
+<img alt="Leyra 1.0.4 首页：线路异常时暂停 Claude 流量" height="980" loading="lazy" src="img/leyra-104-blocked.webp" width="1440"/>
+<img alt="Leyra 1.0.4 诊断与记录" height="980" loading="lazy" src="img/leyra-104-diagnostics.webp" width="1440"/>
+<img alt="Leyra 1.0.4 节点管理" height="980" loading="lazy" src="img/leyra-104-nodes.webp" width="1440"/>
+<img alt="Leyra 1.0.4 分流规则与固定出口白名单" height="980" loading="lazy" src="img/leyra-104-rules.webp" width="1440"/>
+</div>
+<button aria-label="上一张" class="arr l" type="button">‹</button>
+<button aria-label="下一张" class="arr r" type="button">›</button>
+</div>
+<p aria-live="polite" class="shot-cap"></p>
+<p class="n-cap">截图里的账号和 IP 都是示例数据</p>
+</div>
+<div class="n-grid n-g3">
+<div class="n-card n-soft rv"><p class="n-t">固定出口</p><p class="n-d">Claude 只从你的独享 IP 出去，每次都是同一个你。</p></div>
+<div class="n-card n-soft rv d1"><p class="n-t">全入口覆盖</p><p class="n-d">Windows、Mac 上的网页版、桌面端、Claude Code，还有你的 iPhone、安卓手机，都走同一个 IP。</p></div>
+<div class="n-card n-soft rv d2"><p class="n-t">防泄露</p><p class="n-d">DNS、IPv6、WebRTC 都接管，不漏出真实网络。</p></div>
+<div class="n-card n-soft rv"><p class="n-t">线路不对先拦截</p><p class="n-d">没确认安全就先拦住 Claude，恢复后自动放行。</p></div>
+<div class="n-card n-soft rv d1"><p class="n-t">实时守护、自动重连</p><p class="n-d">换 Wi-Fi、睡眠唤醒、设置被改，自动发现并接回。</p></div>
+<div class="n-card n-soft rv d2"><p class="n-t">开机自动连接</p><p class="n-d">开机等网络好了自己连上，不用每次手动点。</p></div>
+</div>
+</div>
+</section>
+<section class="n-sec" id="checks">
+<div class="wrap">
+<p class="n-eyebrow rv">28 项检查</p>
+<h2 class="rv d1">28 项检查，一项不凑数</h2>
+<p class="n-lead rv d2">客户端连着的时候，下面每一项都在后台真的在做；能测出结果的会在客户端「安全检查」页逐项显示。</p>
+<div class="n-grid n-g3">
+<div class="n-card rv"><p class="n-t">出口 <span class="n-n">6</span></p><ul class="n-ul"><li>独享 IP 线路持续健康检查</li><li>出口 IP 每 5 分钟核对一次</li><li>直接问 Claude 它看到的 IP</li><li>每一条 AI 连接都检查有没有走独享 IP</li><li>换网、睡眠唤醒后马上复查</li><li>任何一项不对就拦住 AI，不回落到别的出口</li></ul></div>
+<div class="n-card rv d1"><p class="n-t">防泄露 <span class="n-n">8</span></p><ul class="n-ul"><li>DNS 解析器在哪个国家</li><li>每块网卡的 DNS（含 IPv6）都指向客户端</li><li>IPv6 不绕开</li><li>WebRTC 不暴露真实 IP</li><li>拒绝 AI 网站的 QUIC（UDP）连接</li><li>断网保护：所有流量都经过虚拟网卡</li><li>网络组件意外退出时先拦住 Claude</li><li>常驻兜底：虚拟网卡消失时自动拦住直连</li></ul></div>
+<div class="n-card rv d2"><p class="n-t">应用覆盖 <span class="n-n">5</span></p><ul class="n-ul"><li>Claude Code 走独享 IP，一键修正</li><li>提醒重开连接前就打开的 Claude</li><li>系统代理被别的软件抢走就拦</li><li>不认代理的程序直连 Claude 也拦</li><li>登录、人机验证、身份验证、付款页也走独享 IP</li></ul></div>
+<div class="n-card rv"><p class="n-t">环境 <span class="n-n">7</span></p><ul class="n-ul"><li>别的代理或 VPN 抢流量</li><li>每 20 秒看有没有别的虚拟网卡</li><li>你自己的代理工具在不在</li><li>云电脑等地址冲突自动避开</li><li>清理别的软件留下的系统代理</li><li>客户端保持最新版</li><li>Claude 官方故障提示</li></ul></div>
+<div class="n-card rv d1"><p class="n-t">连接质量 <span class="n-n">2</span></p><ul class="n-ul"><li>到独享 IP 的延迟</li><li>节点自动切换，出口国家不来回变</li></ul></div>
+</div>
+</div>
+</section>
+<section class="n-sec n-white" id="compare">
+<div class="wrap">
+<p class="n-eyebrow rv">对比</p>
+<h2 class="rv d1">和其他做法比</h2>
+<div class="n-card n-tablebox rv d2" id="cmp">
+<table class="n-cmp">
+<thead><tr><th></th><th class="c">普通节点</th><th class="c">自己买独享 IP</th><th class="c n-us">Leyra</th></tr></thead>
+<tbody>
+<tr><td>Claude 看到的 IP 固定不变</td><td class="c no">✕</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+<tr><td>只有你在用，不和陌生人共用</td><td class="c no">✕</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+<tr><td>网页、桌面端、Claude Code 自动统一</td><td class="c no">✕</td><td class="c mid">要自己配</td><td class="c yes">✓</td></tr>
+<tr><td>DNS、IPv6、WebRTC 防泄露</td><td class="c no">✕</td><td class="c mid">要自己配</td><td class="c yes">✓</td></tr>
+<tr><td>出口不对先拦截 Claude，其他网站照常</td><td class="c no">✕</td><td class="c no">✕</td><td class="c yes">✓</td></tr>
+<tr><td>装上就能用，不用懂技术</td><td class="c yes">✓</td><td class="c no">✕</td><td class="c yes">✓</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section class="n-sec" id="pricing">
+<div class="wrap">
+<p class="n-eyebrow rv">价格</p>
+<h2 class="rv d1">先免费试用 1 天，满意再开通</h2>
+<p class="n-lead rv d2">工具不含 IP，用你自己的独享 IP。<a href="docs/buy-static-ip/">还没有？看怎么买</a></p>
+<div class="n-grid n-g2">
+<div class="n-card n-price rv">
+<p class="n-pt">1 天免费试用</p>
+<p class="n-amt">¥0</p>
+<p class="n-d">验证邮箱后开始计时 · 仅支持 Apple 芯片 Mac · 到期暂停受保护的 AI 流量</p>
+<a class="btn n-btn-s" href="#get">下载客户端试用</a>
+</div>
+<div class="n-card n-price n-price-best rv d1">
+<div class="n-row"><p class="n-pt">永久授权</p></div>
+<p><span class="n-amt" data-now-price="">¥199</span></p>
+<p class="n-d">进 QQ 群 <strong>1136427075</strong> 联系客服购买，开通后在客户端刷新授权。</p>
+<button class="btn glow" data-copy-group="" type="button">复制 QQ 群号</button><p class="n-fine" role="status"></p>
+</div>
+</div>
+<p class="n-fine rv">目前仅支持 Apple 芯片 Mac。永久授权一次付款，需自备独享 IP 和上游节点。</p>
+</div>
+</section>
+<section class="n-sec n-white" id="steps">
+<div class="wrap">
+<p class="n-eyebrow rv">三步用起来</p>
+<h2 class="rv d1">下载、登录、连接</h2>
+<p class="n-lead rv d2">开始前准备好：你的节点订阅（或者开着你在用的节点工具），和一条独享 IP。第一次安装、登录时，先开着你正在用的节点工具，客户端要靠它连到我们的服务器。</p>
+<div class="n-grid n-g3">
+<div class="n-card n-soft rv"><p class="n-num">01</p><p class="n-t">下载安装</p><p class="n-d">下载 Apple 芯片 Mac 版并安装。连接前先退出 Claude。</p></div>
+<div class="n-card n-soft rv d1"><p class="n-num">02</p><p class="n-t">登录</p><p class="n-d">注册并验证邮箱后开始 1 天试用，然后准备上游节点。</p></div>
+<div class="n-card n-soft rv d2"><p class="n-num">03</p><p class="n-t">填上独享 IP，连接</p><p class="n-d">十几秒后显示「实时守护中」，再打开 Claude。</p></div>
+</div>
+</div>
+</section>
+<section class="n-sec" id="faq">
+<div class="wrap n-narrow">
+<h2 class="rv">常见问题</h2>
+<div class="n-faq">
+<details class="rv"><summary>我需要准备什么？</summary><p>一台 Windows 10 / 11 或 Mac（macOS 12 及以上）电脑、一条节点订阅链接（推荐，从节点服务商后台复制；复制不出来的，用你正在用的 Clash Verge、v2rayN 等也行），再加一个你自己的独享 · 静态 ISP 代理 IP（还没有的话，文档库里有怎么买的教程）。第一次安装、登录时要先开着你的节点工具，否则客户端连不上。</p></details>
+<details class="rv"><summary>独享 IP 和普通节点有什么区别？</summary><p>普通节点的 IP 是很多人一起用的，而且会随节点切换变来变去。独享 · 静态 ISP 代理 IP 只给你一个人用，一直不变，Claude 每次看到的都是同一个你。Leyra 不卖 IP，用你自己买的独享 IP。</p></details>
+<details class="rv"><summary>会影响我上其他网站吗？</summary><p>不会。客户端只管 Claude，其他网站照常走你原来的网络。</p></details>
+<details class="rv"><summary>Claude Code 也会走我的 IP 吗？</summary><p>会。客户端用虚拟网卡接管整台电脑，Claude 网页版、桌面端和 Claude Code 都走你的同一个独享 IP，不用单独设置代理。</p></details>
+<details class="rv"><summary>手机能用吗？</summary><p>开通终身 VIP 后支持。在电脑客户端里点「添加手机」，iPhone 用小火箭扫码，安卓用 Clash Meta，手机也走你自己的独享 IP。一个账号最多 <span data-max-dev="">5</span> 台设备，电脑和手机都算；试用期只支持 1 台电脑。</p></details>
+<details class="rv"><summary>能和 Clash 等代理软件一起开吗？</summary><p>能，但不推荐。开着别的代理软件时，客户端会改用本地代理模式，浏览器多半走的是那个软件，防护会打折扣。用 Claude 时建议先退出它。</p></details>
+<details class="rv"><summary>安装时安全软件弹窗怎么办？</summary><p>选「允许」。客户端要创建虚拟网卡、修改网卡的 DNS，安全软件会提示。每个弹窗该点什么，<a href="docs/desktop-security-software/">文档库里有详细说明</a>。</p></details>
+<details class="rv"><summary>支持 Mac 吗？手机呢？</summary><p>支持。Mac 版和 Windows 版同时上线，Apple 芯片（M1–M4）和 Intel 都支持，需要 macOS 12 及以上；第一次打开时按提示到「系统设置 → 隐私与安全性」点「仍要打开」。iPhone 和安卓在电脑客户端里点「添加手机」扫码就行。终身 VIP 一份，电脑和手机最多 <span data-max-dev="">5</span> 台。</p></details>
+<details class="rv"><summary>怎么收费？怎么付款？</summary><p>验证邮箱后可试用 1 天。永久授权 ¥199，请进 QQ 群 1136427075 联系客服。<span data-max-dev="">5</span> 台设备（电脑和手机都算），Windows 和 Mac 都能用，包括以后的所有更新；前 100 名创始价 ¥99，之后 ¥299。工具不含 IP，用你自己的独享 IP。目前支持微信支付；因为可以先试用，付款后不退款，「永久」指产品存续期间。</p></details>
+<details class="rv"><summary>怎么卸载？</summary><p>Windows：在「设置 → 应用」里卸载 Leyra，卸载时会把网卡设置恢复原样。Mac：退出客户端，把 App 拖进废纸篓就行，后台组件会在半小时内自动清理。</p></details>
+<details class="rv"><summary>能保证账号不被封吗？</summary><p>不能，也没有人能保证。我们做的是让 Claude 每次看到的网络环境稳定、一致，减少因为网络变化被风控。</p></details>
+</div>
+<p class="n-small rv">更多问题见 <a href="docs/">文档库</a>，或点右下角联系客服。</p>
+</div>
+</section>
+<section class="n-final" id="get">
+<div class="wrap">
+<h2 class="rv">让 Claude 每次看到的都是同一个你</h2>
+<p class="rv d1">先免费试用 1 天，满意再开通终身 VIP。下载客户端，连上之后再打开 Claude。</p>
+<div class="n-cta n-center rv d2"><a class="btn n-btn-light" data-mac="bottom" href="https://client-api.leyra.xin/downloads/desktop/Leyra-macOS-arm64.dmg"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8C7 7.4 5.6 8.3 4.8 9.7c-1.6 2.8-.4 6.9 1.2 9.2.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2-1.1 2.8-2.3.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.6-1-2.6-3.7zM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2.1-.5 2.7-1.3z"></path></svg>下载 Mac 版</a></div>
+<p class="n-final-note rv d3">还没有独享 IP？<a href="docs/buy-static-ip/">看怎么买</a> · <span data-ver="">最新版</span> · Windows 10 / 11 · macOS 12 及以上 · 安装时安全软件弹窗请选「允许」，详见<a href="docs/desktop-security-software/">这篇</a> · <a href="docs/desktop-quick-start/">快速上手</a> · <a href="docs/changelog/">更新日志</a></p>
+</div>
+</section>
+</main>
+<footer class="n-footer"><div class="wrap">
+<span>Claude 是 Anthropic 的商标；Leyra 与 Anthropic 没有关联。© 2026 Leyra</span>
+<span class="n-links"><a href="docs/">文档库</a><a href="docs/changelog/">更新日志</a><a data-contact="" href="#contact">联系客服</a><a href="privacy/">隐私政策</a><a href="terms/">服务条款</a></span>
+</div></footer>
+<!-- 在线客服:访客令牌存本机,不问邮箱;接口连不上时显示客服邮箱 -->
+<a aria-label="联系客服" class="chat" data-contact="" href="#pricing"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M3 14v-3a9 9 0 0 1 18 0v3"></path><path d="M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2zM3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2z"></path></svg><span>联系客服</span></a>
+<dialog aria-label="联系客服" class="wx" id="contact">
+<div class="chat-head"><span class="chat-avatar">AI</span><div class="chat-who"><b>Leyra 客服</b><span><i class="chat-dot" id="chat-dot"></i><span id="chat-hint">正在连接…</span></span></div><button aria-label="关闭" class="wx-x" type="button">×</button></div>
+<div class="chat-list" id="chat-list"><div class="chat-m"><div>你好，我是 Leyra 客服。遇到什么问题直接发在这里，截图也可以。</div><img alt="" aria-hidden="true" class="chat-av" src="icon.png"/></div></div>
+<div aria-label="表情" class="chat-emoji-pop" hidden="" id="chat-emoji-pop" role="menu"></div>
+<div class="chat-box">
+<div class="chat-quote-bar" hidden="" id="chat-quote-bar"><span id="chat-quote-text"></span><button aria-label="取消引用" id="chat-quote-x" type="button">×</button></div>
+<textarea id="chat-text" maxlength="2000" placeholder="输入消息，回车发送" rows="2"></textarea>
+<div class="chat-tools">
+<button aria-label="表情" class="chat-tool" id="chat-emoji" title="表情" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0"></path><path d="M9 9.5v.5"></path><path d="M15 9.5v.5"></path></svg></button>
+<label aria-label="发文件" class="chat-tool" title="发文件（最大 10 MB）"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><input hidden="" id="chat-doc" type="file"/></label>
+<label aria-label="发截图" class="chat-tool" title="发截图"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><rect height="14" rx="2" width="18" x="3" y="5"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="M21 16l-5-5-8 8"></path></svg><input accept="image/*" hidden="" id="chat-file" type="file"/></label>
+<button aria-label="发送" class="chat-send" id="chat-send" type="button">发送</button>
+</div>
+</div>
+</dialog>
+<!-- 下载弹窗(PM 10-25) -->
+</body>
+</html>

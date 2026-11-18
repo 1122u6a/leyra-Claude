@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="no-referrer" name="referrer"/><title>iPhone:Shadowrocket 配置指南 · 文档库 · Leyra</title><meta content="在 iPhone 上用 Shadowrocket(小火箭)导入 AI Network 配置,让 Claude、ChatGPT、Gemini 走你的独享 IP。" name="description"/><link href="./" rel="canonical"/><meta content="article" property="og:type"/><meta content="AI Network" property="og:site_name"/><meta content="iPhone:Shadowrocket 配置指南 · 文档库 · AI Network" property="og:title"/><meta content="在 iPhone 上用 Shadowrocket(小火箭)导入 AI Network 配置,让 Claude、ChatGPT、Gemini 走你的独享 IP。" property="og:description"/><meta content="https://client-api.leyra.xin/docs/shadowrocket-setup" property="og:url"/><meta content="https://client-api.leyra.xin/assets/leyra-orange-104.jpeg" property="og:image"/><meta content="summary" name="twitter:card"/><style>
+:root{--ink:#101A19;--sub:#33413D;--mute:#6B7772;--line:#DDE3E0;--bg:#F3F5F4;--brand:#0B6B5C;--tint:#DCEFEA}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font-family:'IBM Plex Sans','Microsoft YaHei','PingFang SC',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75}
+a{color:var(--brand)}
+header{position:sticky;top:0;z-index:5;background:rgba(243,245,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .in{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--ink);text-decoration:none}
+nav{display:flex;gap:22px;align-items:center;font-size:14.5px}
+nav a{color:var(--sub);text-decoration:none}
+nav a:hover,nav a.on{color:var(--brand)}
+nav a.on{font-weight:600}
+nav .btn{color:#fff;padding:8px 16px;font-size:14px}
+.btn{display:inline-block;border-radius:12px;background:var(--brand);color:#fff;font-weight:600;text-decoration:none}
+.btn:hover{background:#08493F;color:#fff}
+.layout{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:280px minmax(0,1fr) 230px;gap:0;align-items:start}
+.side{position:sticky;top:60px;max-height:calc(100vh - 60px);overflow-y:auto;padding:24px 14px 40px 20px;border-right:1px solid var(--line);font-size:14.5px}
+.side details{margin:0}
+.side summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;font-weight:600;color:var(--ink)}
+.side summary::-webkit-details-marker{display:none}
+.side summary::before{content:"";width:6px;height:6px;border-right:1.6px solid var(--mute);border-bottom:1.6px solid var(--mute);transform:rotate(45deg);margin:0 4px 3px 2px;flex:none;transition:transform .15s}
+.side details:not([open])>summary::before{transform:rotate(-45deg);margin-bottom:0}
+.side .sub>summary{font-weight:500;color:var(--mute);font-size:14px}
+.side .kids{margin-left:12px;padding-left:8px;border-left:1px solid var(--line)}
+.side a{display:block;padding:7px 12px;border-radius:8px;color:var(--sub);text-decoration:none;line-height:1.5}
+.side a:hover{background:#E9EFEC}
+.side a.cur{background:#fff;color:var(--brand);font-weight:600;box-shadow:0 1px 0 var(--line)}
+.main{padding:32px 48px 72px;min-width:0}
+.crumb{font-size:13.5px;color:var(--mute);margin-bottom:18px}
+.crumb a{color:var(--mute);text-decoration:none}
+.crumb a:hover{color:var(--brand)}
+.crumb i{font-style:normal;margin:0 6px}
+.doc{max-width:780px}
+.doc h1{margin:0 0 6px;font-size:34px;line-height:1.3;letter-spacing:-.3px}
+.meta{margin:0 0 28px;font-size:13px;color:var(--mute)}
+.doc h2{margin:44px 0 12px;font-size:26px;line-height:1.35}
+.doc h3{margin:32px 0 10px;font-size:20px}
+.doc h4,.doc h5{margin:22px 0 8px;font-size:16.5px}
+.doc p,.doc li{font-size:16px;color:#26332F}
+.doc p{margin:0 0 16px}
+.doc ul,.doc ol{margin:0 0 16px;padding-left:24px}
+.doc li{margin-bottom:5px}
+.doc img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--line)}
+.doc blockquote{margin:0 0 18px;padding:6px 18px;border-left:4px solid #D9822B;background:#F7F1E8;border-radius:0 10px 10px 0}
+.doc blockquote p{margin:8px 0;color:#4F4636}
+.doc hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+code{font-family:'IBM Plex Mono',Consolas,monospace;font-size:.9em;background:#E8EEEB;border-radius:6px;padding:1px 6px}
+pre{margin:0 0 18px;padding:14px 16px;background:#0F1A18;color:#E6F2EE;border-radius:12px;overflow-x:auto;line-height:1.6}
+pre code{background:none;padding:0;color:inherit;font-size:13.5px}
+.pn{display:flex;justify-content:space-between;gap:16px;margin-top:48px;padding-top:22px;border-top:1px solid var(--line)}
+.pn a{display:block;max-width:48%;padding:12px 16px;border:1px solid var(--line);background:#fff;border-radius:12px;text-decoration:none;color:var(--ink)}
+.pn a:hover{border-color:var(--brand)}
+.pn small{display:block;color:var(--mute);font-size:12.5px}
+.pn .next{margin-left:auto;text-align:right}
+.toc{position:sticky;top:60px;padding:28px 16px 40px 8px;font-size:13.5px;max-height:calc(100vh - 60px);overflow-y:auto}
+.toc b{display:block;margin-bottom:10px;color:var(--mute);font-weight:500}
+.toc div{border-left:2px solid var(--line)}
+.toc a{display:block;padding:4px 12px;color:var(--sub);text-decoration:none;line-height:1.5}
+.toc a:hover{color:var(--brand)}
+.toc a.l3{padding-left:28px;color:var(--mute)}
+h1.t{margin:0 0 8px;font-size:34px;line-height:1.3}
+.lead{margin:0 0 30px;color:var(--sub)}
+h2.cat{margin:30px 0 14px;font-size:15px;color:var(--mute);font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;text-decoration:none;color:inherit}
+.card:hover{border-color:var(--brand);box-shadow:0 12px 28px -20px var(--brand)}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0;font-size:14px;color:var(--sub)}
+.empty{background:#fff;border:1px solid var(--line);border-radius:16px;padding:40px 20px;text-align:center;color:var(--sub)}
+footer{border-top:1px solid var(--line);padding:30px 0;font-size:13px;color:var(--mute)}
+footer .in{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--mute);margin-right:18px}
+footer p{margin:0}
+@media(max-width:1180px){.layout{grid-template-columns:260px minmax(0,1fr)}.toc{display:none}}
+@media(max-width:820px){
+ .layout{display:block}
+ .side{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding:12px 16px}
+ .main{padding:24px 20px 56px}
+ .doc h1,h1.t{font-size:27px}
+ .doc h2{font-size:22px}
+ nav a:not(.btn):not(.on){display:none}
+ .pn{flex-direction:column}.pn a{max-width:100%}.pn .next{margin-left:0}
+}
+</style><style>@font-face{font-family:MiSans;src:url('../../assets/misans.woff2') format('woff2');font-display:swap}body{font-family:MiSans,system-ui,sans-serif}.rv{opacity:1!important;transform:none!important;visibility:visible!important}.btn,button,.leyra-action{background:#ae390e!important;border-color:#ae390e!important;color:#fff!important;text-decoration:none!important}.btn:hover,button:hover,.leyra-action:hover{background:#922b07!important}.leyra-action{display:inline-block;border:0;border-radius:8px;padding:11px 17px;font:inherit;cursor:pointer}.leyra-platform{margin:18px 0;background:#fff0e5;color:#713010;padding:12px 16px;border-radius:8px}</style><script defer="True" src="../../assets/site.js"></script><link href="../../assets/leyra-orange-104.jpeg" rel="icon" type="image/jpeg"/><style>
+.brand .leyra-brand-logo { display:block; width:36px; height:36px; flex:none; object-fit:cover; border-radius:8px; border:0; box-shadow:none; }
+.brand { display:inline-flex; align-items:center; gap:9px; }
+.leyra-action:focus-visible,.btn:focus-visible,button:focus-visible {outline:3px solid #963105;outline-offset:3px}
+</style></head>
+<body><header><div class="in"><a class="brand" href="../../"><img alt="" class="leyra-brand-logo" height="36" src="../../assets/leyra-orange-104.jpeg" width="36"/>Leyra</a><nav><a href="../../#features">功能</a><a href="../../#how">使用方法</a><a href="../../#pricing">价格</a><a href="../../#faq">常见问题</a><a class="on" href="../">文档库</a><a class="btn" href="../../#get">下载客户端</a></nav></div></header>
+<div class="layout"><aside aria-label="文档目录" class="side"><a href="../">全部文档</a><a href="../changelog/">更新日志</a><a href="../desktop-quick-start/">快速上手:安装、登录、连接</a><a href="../buy-static-ip/">独享 · 静态 ISP 代理 IP 怎么买</a><a href="../desktop-modes/">虚拟网卡模式和本地代理模式</a><a href="../desktop-coverage/">哪些流量能管住,哪些管不住</a><a href="../desktop-security-software/">安全软件弹窗和拦截怎么办</a><a href="../desktop-checks/">八项检测是什么、异常怎么处理</a><a href="../desktop-faq/">桌面客户端常见问题</a><details open=""><summary>AI 使用指南</summary><div class="kids"><details class="sub" open=""><summary>入门导读</summary><div class="kids"><a href="../getting-started/">新手路线:从安装到稳定使用</a><a href="../three-factors/">稳定使用 AI 的三个要素:网络、设备、使用习惯</a></div></details><details class="sub" open=""><summary>网络配置</summary><div class="kids"><a aria-current="page" class="cur" href="./">iPhone:Shadowrocket 配置指南</a><a href="../network-faq/">网络常见问题</a><a href="../choose-front-node/">前置节点怎么选</a></div></details></div></details></aside><div class="main"><div class="crumb"><a href="../">文档库</a><i>›</i><span>AI 使用指南</span><i>›</i><span>网络配置</span><i>›</i><span>iPhone:Shadowrocket 配置指南</span></div><article class="doc"><h1>iPhone:Shadowrocket 配置指南</h1><p class="leyra-platform">当前 Leyra 发行包仅支持 Apple 芯片 Mac。本页中的 Windows、手机和第三方客户端操作为原站参考资料。</p><p class="meta">更新于 2026-10-14</p><p>这篇讲怎么在 iPhone(或 iPad)上用 Shadowrocket,也就是大家常说的「小火箭」,接入 Leyra。配好以后,手机上访问 Claude、ChatGPT、Gemini 的流量会走你的独享 IP,和电脑用的是同一个 IP;其他网站照旧走你原来的节点。</p>
+<p>整个过程分三段:在插件里生成配置,在小火箭里导入并启用,最后用手机自检确认 AI 流量真的走了你的 IP。</p>
+<h3 id="s1">开始之前</h3>
+<ul><li>一台装好 Shadowrocket 的 iPhone 或 iPad。</li><li>小火箭里已经有你自己能用的节点(你原本的订阅)。这一点很重要:我们的配置不带普通节点,连接你的独享 IP 时要先经过你自己的某个节点转发,这一段叫「前置」。小火箭里一个节点都没有,配置导进去也连不上。</li><li>电脑上已经装好 Leyra 插件,并且已经开通会员、分配好了 IP。还没装插件的话,先看 <a href="../">插件配置指南</a>。</li></ul>
+<h3 id="s2">第一步:在插件里生成小火箭配置</h3>
+<p>第一次配置时,插件会带你走到「获取配置」这一步,在「选择你的客户端」里找到 <strong>Shadowrocket</strong>(下面写着 iPhone · iPad · Conf 配置),点它右边的 <strong>获取配置</strong>。</p>
+<p>如果电脑已经配好了 Clash Verge Rev,现在想再加一部手机:在插件首页点「我的 IP」那张卡进入 IP 详情,点「设备」,再点 <strong>添加设备</strong>,然后同样选 Shadowrocket。</p>
+<p>生成后插件会显示一个二维码和「复制配置链接」按钮。这个链接相当于这部手机的专属钥匙,里面包含连接你独享 IP 的信息,不要发给别人,也不要截图发到群里。</p>
+<h3 id="s3">第二步:在小火箭里导入配置</h3>
+<p>有两种导入方式,任选一种。</p>
+<p><strong>扫码导入(推荐)</strong></p>
+<ol><li>打开小火箭,点首页右上角的扫码图标。</li><li>对准电脑屏幕上插件显示的二维码扫一下。</li></ol>
+<p>注意要用小火箭自己的扫码功能。iPhone 自带的相机扫这个码没有用。</p>
+<p><strong>复制链接导入</strong></p>
+<p>如果扫不了,在插件里点 <strong>复制配置链接</strong>,想办法把链接发到手机上(比如发给自己的备忘录),然后在小火箭底部切到「配置」页,点右上角的「+」,粘贴链接下载。</p>
+<h3 id="s4">第三步:启用这份配置</h3>
+<ol><li>在小火箭的「配置」页,点刚导入的这份配置,选 <strong>使用配置</strong>。</li><li>回到首页,把「全局路由」选成 <strong>配置</strong>。</li><li>打开顶部的连接开关。第一次打开时 iOS 会询问是否允许添加 VPN 配置,按提示允许即可。</li></ol>
+<p>「全局路由」这一步最容易漏。如果选的是「代理」,所有流量都会走首页选中的那一个节点,分流就不起作用了。</p>
+<p>小火箭下载配置后,电脑上的插件会自动发现,页面会继续往下走,不用你手动刷新。如果迟迟没有反应,可以点插件里的「我已导入,立即刷新」。</p>
+<h3 id="s5">第四步:手机自检</h3>
+<p>导入成功后,插件页面会出现「最后一步:在手机上自检」和一个新的二维码。这次要用 <strong>iPhone 自带的相机</strong> 扫,在 Safari 里打开自检页。自检页会检查手机上 AI 流量的出口,结果会同步回插件:</p>
+<ul><li>显示「手机已验证:AI 流量走的是你的 IP」,就说明配好了。</li><li>显示「AI 流量没有走你的 IP」,先确认小火箭正在使用这份配置、「全局路由」选的是「配置」,再扫码自检一次。</li><li>显示「连不上你的 IP」,多半是前置节点连不上你的 IP,处理方法见下面「claude.ai 打不开」那一条。</li></ul>
+<p>扫不了码的话,可以点「复制自检链接」,发到手机上用 Safari 打开。</p>
+<p>插件里的网络环境体检只检测电脑上的浏览器,手机是否正常要靠这个自检来确认。</p>
+<h3 id="s6">导入后小火箭里多出来的分组</h3>
+<p>导入以后,小火箭里会多几个分组。一般都不用动,了解一下各自管什么就行:</p>
+<ul><li><strong>AI</strong>:Claude、ChatGPT、Gemini 以及它们的登录、人机验证、付款相关的域名,都固定走这个分组,里面只有你的独享 IP 这一个节点。</li><li><strong>前置中转</strong>:连接独享 IP 时先经过的节点。默认是「自动选择」。</li><li><strong>日常上网</strong>:除了 AI 和本地网站以外的其他境外流量走这里,默认也是「自动选择」,也可以改成手动选择或直连。</li><li><strong>自动选择</strong>:从你小火箭里已有的节点中自动挑一个延迟低的。</li><li><strong>手动选择</strong>:想自己指定节点时用。把「前置中转」或「日常上网」改成「手动选择」,再到「手动选择」里挑一个节点。</li></ul>
+<p>你所在地区的网站会直连,不走任何节点。所在地区是在插件里创建这份配置时按电脑设置自动识别的。</p>
+<h3 id="s7">常见问题</h3>
+<p><strong>给 AI-Network 开头的那个节点测速,显示超时?</strong></p>
+<p>小火箭默认的测速方式对这个节点不准,显示超时不代表不能用。到小火箭的设置里,把连通性测试的方式改成 TCP,再测就有数字了。真正判断能不能用,以手机自检和实际打开 AI 网站为准。</p>
+<p><strong>所有网站都打不开,或者所有网站都走了独享 IP?</strong></p>
+<p>检查首页「全局路由」是不是「配置」。</p>
+<p><strong>claude.ai 打不开,其他境外网站正常?</strong></p>
+<p>多半是「前置中转」当前用的节点连不上你的独享 IP。把「前置中转」改成「手动选择」,在「手动选择」里换一个节点再试,换好后重新扫码自检。怎么挑前置节点,可以看 <a href="../choose-front-node/">前置节点怎么选</a>。</p>
+<p><strong>换了 IP,或者在插件里重新生成了配置,手机要做什么?</strong></p>
+<p>小火箭的配置里直接写着连接信息,不会像电脑上的 Clash 脚本那样自己去拿新 IP。换 IP 后,在小火箭「配置」页下拉刷新,或者点这份配置选「更新」。如果是重新生成了配置链接,旧链接会立即失效,需要按上面的步骤重新导入一次。</p>
+<p><strong>换了自己的节点订阅,要重新导入吗?</strong></p>
+<p>不需要。「自动选择」和「手动选择」会从你小火箭里现有的节点中挑,换了订阅只要小火箭里有新节点就行。</p>
+<p><strong>配置链接不小心发出去了怎么办?</strong></p>
+<p>在插件里这部手机的配置页底部,点「配置链接泄漏了?重新生成这台设备的配置」。只有这部手机的旧链接会失效,其他设备不受影响。重新生成后在手机上重新导入。</p>
+<p><strong>支持安卓吗?</strong></p>
+<p>目前不支持安卓,手机端只支持 iPhone 和 iPad 上的 Shadowrocket。</p>
+<p>还有其他网络方面的疑问,可以看 <a href="../network-faq/">网络常见问题</a>,或者在插件里找在线客服。</p><div class="pn"><a href="../three-factors/"><small>上一篇</small>稳定使用 AI 的三个要素:网络、设备、使用习惯</a><a class="next" href="../network-faq/"><small>下一篇</small>网络常见问题</a></div></article></div><aside aria-label="本页目录" class="toc"><b>本页目录</b><div><a class="l3" href="#s1">开始之前</a><a class="l3" href="#s2">第一步:在插件里生成小火箭配置</a><a class="l3" href="#s3">第二步:在小火箭里导入配置</a><a class="l3" href="#s4">第三步:启用这份配置</a><a class="l3" href="#s5">第四步:手机自检</a><a class="l3" href="#s6">导入后小火箭里多出来的分组</a><a class="l3" href="#s7">常见问题</a></div></aside></div>
+<footer><div class="in"><p>© 2026 Leyra</p><div><a href="../../privacy/">隐私政策</a><a href="../../terms/">服务条款</a></div></div></footer></body></html>

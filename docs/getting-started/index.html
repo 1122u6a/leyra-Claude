@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="no-referrer" name="referrer"/><title>新手路线:从安装到稳定使用 · 文档库 · Leyra</title><meta content="第一次用 AI Network?按这条路线走一遍:先懂原则,再装插件、开通、配置客户端、做体检,最后再处理账号和付费。" name="description"/><link href="./" rel="canonical"/><meta content="article" property="og:type"/><meta content="AI Network" property="og:site_name"/><meta content="新手路线:从安装到稳定使用 · 文档库 · AI Network" property="og:title"/><meta content="第一次用 AI Network?按这条路线走一遍:先懂原则,再装插件、开通、配置客户端、做体检,最后再处理账号和付费。" property="og:description"/><meta content="https://client-api.leyra.xin/docs/getting-started" property="og:url"/><meta content="https://client-api.leyra.xin/assets/leyra-orange-104.jpeg" property="og:image"/><meta content="summary" name="twitter:card"/><style>
+:root{--ink:#101A19;--sub:#33413D;--mute:#6B7772;--line:#DDE3E0;--bg:#F3F5F4;--brand:#0B6B5C;--tint:#DCEFEA}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font-family:'IBM Plex Sans','Microsoft YaHei','PingFang SC',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75}
+a{color:var(--brand)}
+header{position:sticky;top:0;z-index:5;background:rgba(243,245,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .in{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--ink);text-decoration:none}
+nav{display:flex;gap:22px;align-items:center;font-size:14.5px}
+nav a{color:var(--sub);text-decoration:none}
+nav a:hover,nav a.on{color:var(--brand)}
+nav a.on{font-weight:600}
+nav .btn{color:#fff;padding:8px 16px;font-size:14px}
+.btn{display:inline-block;border-radius:12px;background:var(--brand);color:#fff;font-weight:600;text-decoration:none}
+.btn:hover{background:#08493F;color:#fff}
+.layout{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:280px minmax(0,1fr) 230px;gap:0;align-items:start}
+.side{position:sticky;top:60px;max-height:calc(100vh - 60px);overflow-y:auto;padding:24px 14px 40px 20px;border-right:1px solid var(--line);font-size:14.5px}
+.side details{margin:0}
+.side summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;font-weight:600;color:var(--ink)}
+.side summary::-webkit-details-marker{display:none}
+.side summary::before{content:"";width:6px;height:6px;border-right:1.6px solid var(--mute);border-bottom:1.6px solid var(--mute);transform:rotate(45deg);margin:0 4px 3px 2px;flex:none;transition:transform .15s}
+.side details:not([open])>summary::before{transform:rotate(-45deg);margin-bottom:0}
+.side .sub>summary{font-weight:500;color:var(--mute);font-size:14px}
+.side .kids{margin-left:12px;padding-left:8px;border-left:1px solid var(--line)}
+.side a{display:block;padding:7px 12px;border-radius:8px;color:var(--sub);text-decoration:none;line-height:1.5}
+.side a:hover{background:#E9EFEC}
+.side a.cur{background:#fff;color:var(--brand);font-weight:600;box-shadow:0 1px 0 var(--line)}
+.main{padding:32px 48px 72px;min-width:0}
+.crumb{font-size:13.5px;color:var(--mute);margin-bottom:18px}
+.crumb a{color:var(--mute);text-decoration:none}
+.crumb a:hover{color:var(--brand)}
+.crumb i{font-style:normal;margin:0 6px}
+.doc{max-width:780px}
+.doc h1{margin:0 0 6px;font-size:34px;line-height:1.3;letter-spacing:-.3px}
+.meta{margin:0 0 28px;font-size:13px;color:var(--mute)}
+.doc h2{margin:44px 0 12px;font-size:26px;line-height:1.35}
+.doc h3{margin:32px 0 10px;font-size:20px}
+.doc h4,.doc h5{margin:22px 0 8px;font-size:16.5px}
+.doc p,.doc li{font-size:16px;color:#26332F}
+.doc p{margin:0 0 16px}
+.doc ul,.doc ol{margin:0 0 16px;padding-left:24px}
+.doc li{margin-bottom:5px}
+.doc img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--line)}
+.doc blockquote{margin:0 0 18px;padding:6px 18px;border-left:4px solid #D9822B;background:#F7F1E8;border-radius:0 10px 10px 0}
+.doc blockquote p{margin:8px 0;color:#4F4636}
+.doc hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+code{font-family:'IBM Plex Mono',Consolas,monospace;font-size:.9em;background:#E8EEEB;border-radius:6px;padding:1px 6px}
+pre{margin:0 0 18px;padding:14px 16px;background:#0F1A18;color:#E6F2EE;border-radius:12px;overflow-x:auto;line-height:1.6}
+pre code{background:none;padding:0;color:inherit;font-size:13.5px}
+.pn{display:flex;justify-content:space-between;gap:16px;margin-top:48px;padding-top:22px;border-top:1px solid var(--line)}
+.pn a{display:block;max-width:48%;padding:12px 16px;border:1px solid var(--line);background:#fff;border-radius:12px;text-decoration:none;color:var(--ink)}
+.pn a:hover{border-color:var(--brand)}
+.pn small{display:block;color:var(--mute);font-size:12.5px}
+.pn .next{margin-left:auto;text-align:right}
+.toc{position:sticky;top:60px;padding:28px 16px 40px 8px;font-size:13.5px;max-height:calc(100vh - 60px);overflow-y:auto}
+.toc b{display:block;margin-bottom:10px;color:var(--mute);font-weight:500}
+.toc div{border-left:2px solid var(--line)}
+.toc a{display:block;padding:4px 12px;color:var(--sub);text-decoration:none;line-height:1.5}
+.toc a:hover{color:var(--brand)}
+.toc a.l3{padding-left:28px;color:var(--mute)}
+h1.t{margin:0 0 8px;font-size:34px;line-height:1.3}
+.lead{margin:0 0 30px;color:var(--sub)}
+h2.cat{margin:30px 0 14px;font-size:15px;color:var(--mute);font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;text-decoration:none;color:inherit}
+.card:hover{border-color:var(--brand);box-shadow:0 12px 28px -20px var(--brand)}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0;font-size:14px;color:var(--sub)}
+.empty{background:#fff;border:1px solid var(--line);border-radius:16px;padding:40px 20px;text-align:center;color:var(--sub)}
+footer{border-top:1px solid var(--line);padding:30px 0;font-size:13px;color:var(--mute)}
+footer .in{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--mute);margin-right:18px}
+footer p{margin:0}
+@media(max-width:1180px){.layout{grid-template-columns:260px minmax(0,1fr)}.toc{display:none}}
+@media(max-width:820px){
+ .layout{display:block}
+ .side{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding:12px 16px}
+ .main{padding:24px 20px 56px}
+ .doc h1,h1.t{font-size:27px}
+ .doc h2{font-size:22px}
+ nav a:not(.btn):not(.on){display:none}
+ .pn{flex-direction:column}.pn a{max-width:100%}.pn .next{margin-left:0}
+}
+</style><style>@font-face{font-family:MiSans;src:url('../../assets/misans.woff2') format('woff2');font-display:swap}body{font-family:MiSans,system-ui,sans-serif}.rv{opacity:1!important;transform:none!important;visibility:visible!important}.btn,button,.leyra-action{background:#ae390e!important;border-color:#ae390e!important;color:#fff!important;text-decoration:none!important}.btn:hover,button:hover,.leyra-action:hover{background:#922b07!important}.leyra-action{display:inline-block;border:0;border-radius:8px;padding:11px 17px;font:inherit;cursor:pointer}.leyra-platform{margin:18px 0;background:#fff0e5;color:#713010;padding:12px 16px;border-radius:8px}</style><script defer="True" src="../../assets/site.js"></script><link href="../../assets/leyra-orange-104.jpeg" rel="icon" type="image/jpeg"/><style>
+.brand .leyra-brand-logo { display:block; width:36px; height:36px; flex:none; object-fit:cover; border-radius:8px; border:0; box-shadow:none; }
+.brand { display:inline-flex; align-items:center; gap:9px; }
+.leyra-action:focus-visible,.btn:focus-visible,button:focus-visible {outline:3px solid #963105;outline-offset:3px}
+</style></head>
+<body><header><div class="in"><a class="brand" href="../../"><img alt="" class="leyra-brand-logo" height="36" src="../../assets/leyra-orange-104.jpeg" width="36"/>Leyra</a><nav><a href="../../#features">功能</a><a href="../../#how">使用方法</a><a href="../../#pricing">价格</a><a href="../../#faq">常见问题</a><a class="on" href="../">文档库</a><a class="btn" href="../../#get">下载客户端</a></nav></div></header>
+<div class="layout"><aside aria-label="文档目录" class="side"><a href="../">全部文档</a><a href="../changelog/">更新日志</a><a href="../desktop-quick-start/">快速上手:安装、登录、连接</a><a href="../buy-static-ip/">独享 · 静态 ISP 代理 IP 怎么买</a><a href="../desktop-modes/">虚拟网卡模式和本地代理模式</a><a href="../desktop-coverage/">哪些流量能管住,哪些管不住</a><a href="../desktop-security-software/">安全软件弹窗和拦截怎么办</a><a href="../desktop-checks/">八项检测是什么、异常怎么处理</a><a href="../desktop-faq/">桌面客户端常见问题</a><details open=""><summary>AI 使用指南</summary><div class="kids"><details class="sub" open=""><summary>入门导读</summary><div class="kids"><a aria-current="page" class="cur" href="./">新手路线:从安装到稳定使用</a><a href="../three-factors/">稳定使用 AI 的三个要素:网络、设备、使用习惯</a></div></details><details class="sub" open=""><summary>网络配置</summary><div class="kids"><a href="../shadowrocket-setup/">iPhone:Shadowrocket 配置指南</a><a href="../network-faq/">网络常见问题</a><a href="../choose-front-node/">前置节点怎么选</a></div></details></div></details></aside><div class="main"><div class="crumb"><a href="../">文档库</a><i>›</i><span>AI 使用指南</span><i>›</i><span>入门导读</span><i>›</i><span>新手路线:从安装到稳定使用</span></div><article class="doc"><h1>新手路线:从安装到稳定使用</h1><p class="leyra-platform">当前 Leyra 发行包仅支持 Apple 芯片 Mac。本页中的 Windows、手机和第三方客户端操作为原站参考资料。</p><p class="meta">更新于 2026-10-29</p><p>第一次接触 Leyra 的朋友,常见的困惑是「东西不少,不知道先看哪篇」。这篇把整个过程排成一条路线,照着顺序走,大概半小时就能把电脑配好。已经在用的老用户,可以直接跳到自己卡住的那一步。</p>
+<h3 id="s1">先说清楚我们在解决什么问题</h3>
+<p>我们的出发点很简单:让 Claude、ChatGPT、Gemini 看到的网络出口固定下来,并且和你<strong>实际所在的国家</strong>一致。</p>
+<p>很多人用 AI 时遇到的验证、受限、登录异常,背后常常是网络环境一直在变:今天走这个节点,明天走那个节点,同一个出口还被很多陌生人共用。Leyra 给你一个独享 · 静态 ISP 代理 IP(或者帮你管理你自己的独享 · 静态 ISP 代理 IP),再把 AI 流量稳定地送到这个 IP 上,其他流量照旧。</p>
+<p>需要先说明的是,我们能做的是减少因网络环境变化被风控的情况,不能承诺账号一定不受限制。各家 AI 服务的账号和地区政策由它们自己决定。</p>
+<h3 id="s2">第一步:花几分钟了解三个要素</h3>
+<p>动手之前,建议先读 <a href="../three-factors/">稳定使用 AI 的三个要素</a>。它讲网络、设备、使用习惯三件事各自起什么作用。理解了这些,后面每一步为什么这样设置,心里会更有数,也不容易被网上各种说法带偏。</p>
+<h3 id="s3">第二步:安装插件,注册登录</h3>
+<p>Leyra 的操作基本都在浏览器插件里完成。</p>
+<ol><li>用官网提供的安装链接,在 Chrome 里安装「Leyra」插件。</li><li>点浏览器工具栏上的插件图标打开它。第一页是功能介绍,点「开通会员」或「已有账号,登录」。</li><li>可以用 Google 账号登录,也可以用邮箱注册。邮箱注册后要去邮箱里点验证链接,再回插件点「我已完成验证」。</li></ol>
+<p>详细的界面说明见 <a href="../">插件配置指南</a>。</p>
+<h3 id="s4">第三步:选套餐并开通</h3>
+<p>插件里有两种会员,可以在「两种会员有什么不同」里对比:</p>
+<ul><li><strong>独享 IP</strong>:我们给你分配一个只给你用的独享 · 静态 ISP 代理 IP,可以选地区(以插件里显示的库存为准)。</li><li><strong>自带 IP</strong>:你已经有自己的独享 · 静态 ISP 代理 IP,只需要填进连接信息,分流、监控、体检这些由我们负责。</li></ul>
+<p>付款后,独享 IP 一般不到一分钟就分配好;自带 IP 则会让你填写 IP 的连接信息。如果拿不准该选哪种,可以先读 <a href="../">什么是独享 · 静态 ISP 代理 IP</a>。</p>
+<h3 id="s5">第四步:把配置装到你的设备上</h3>
+<p>开通完成后,插件会进入「获取配置」页,让你选择客户端。</p>
+<ul><li><strong>电脑(Windows、macOS)</strong>:用 Clash Verge Rev。在插件里复制一段扩展脚本,粘贴到 Clash Verge Rev 就行。步骤见 <a href="../">电脑端:Clash Verge Rev 配置指南</a>。</li><li><strong>iPhone、iPad</strong>:用 Shadowrocket(小火箭)。在插件里扫码或复制链接导入。步骤见 <a href="../shadowrocket-setup/">iPhone:Shadowrocket 配置指南</a>。</li></ul>
+<p>电脑端的脚本会让 AI 流量经过你订阅里的节点再连到独享 IP,所以电脑上需要先有一份能正常使用的订阅。前置节点怎么挑,见 <a href="../choose-front-node/">前置节点怎么选</a>。</p>
+<p>目前暂不支持安卓、软路由和独立客户端,后面支持了会另外写教程。</p>
+<h3 id="s6">第五步:做一次网络环境体检</h3>
+<p>电脑上的 Clash Verge Rev 连上以后,插件会自动进入首页并检测一次。首页顶部有一句结论,下面是你的 IP 和「网络环境体检」入口。</p>
+<p>体检会告诉你:AI 网站看到的出口 IP 和国家、DNS 和 WebRTC 是否一致、AI 网站 / 其他境外网站 / 国内网站分别走的是哪个出口。全部正常再去用 AI。如果有问题,处理办法就写在对应项目下面。想自己再核对一遍,可以看 <a href="../">怎样确认 AI 用的是你的独享 IP</a>。</p>
+<p>之后浏览器开着时插件会定时复检。打开 AI 网站前如果发现出口不对,插件会先拦住,告诉你 AI 网站看到的是哪个 IP、该怎么修,避免在错误的网络下登录。</p>
+<h3 id="s7">第六步:再处理账号和付费</h3>
+<p>网络确认没问题之后,再去做跟账号有关的事:</p>
+<ul><li>还没有 AI 账号:先读 <a href="../">注册 AI 账号的注意事项</a>。</li><li>打算订阅付费版:先读 <a href="../">订阅付费的注意事项</a>。</li><li>已有老账号:刚换到新的网络环境时,先正常使用一段时间,别急着改资料或换付款方式。</li></ul>
+<h3 id="s8">日常使用</h3>
+<p>配置好以后,平时基本不用管。规则会自动更新,IP 如果需要更换,Clash 端也会自动拿到新的,不用重新复制脚本。遇到问题可以按这个顺序找答案:</p>
+<ul><li>网络连不上、速度慢:<a href="../network-faq/">网络常见问题</a></li><li>网上说某家 AI「大面积受限」:<a href="../">看到传闻时怎么自查</a></li><li>担心这担心那:<a href="../">别被焦虑带着走</a></li><li>账号真的出了状况:<a href="../">账号被停用或受限后怎么办</a></li></ul>
+<p>还是解决不了,在插件里打开诊断报告,一键复制后发给在线客服,我们会帮你看。</p><div class="pn"><a href="../desktop-faq/"><small>上一篇</small>桌面客户端常见问题</a><a class="next" href="../three-factors/"><small>下一篇</small>稳定使用 AI 的三个要素:网络、设备、使用习惯</a></div></article></div><aside aria-label="本页目录" class="toc"><b>本页目录</b><div><a class="l3" href="#s1">先说清楚我们在解决什么问题</a><a class="l3" href="#s2">第一步:花几分钟了解三个要素</a><a class="l3" href="#s3">第二步:安装插件,注册登录</a><a class="l3" href="#s4">第三步:选套餐并开通</a><a class="l3" href="#s5">第四步:把配置装到你的设备上</a><a class="l3" href="#s6">第五步:做一次网络环境体检</a><a class="l3" href="#s7">第六步:再处理账号和付费</a><a class="l3" href="#s8">日常使用</a></div></aside></div>
+<footer><div class="in"><p>© 2026 Leyra</p><div><a href="../../privacy/">隐私政策</a><a href="../../terms/">服务条款</a></div></div></footer></body></html>

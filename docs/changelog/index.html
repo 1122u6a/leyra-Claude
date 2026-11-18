@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="no-referrer" name="referrer"/><title>更新日志 · Leyra</title><meta content="AI Network 桌面客户端每个版本改进了什么。" name="description"/><link href="./" rel="canonical"/><meta content="website" property="og:type"/><meta content="AI Network" property="og:site_name"/><meta content="更新日志 · AI Network" property="og:title"/><meta content="AI Network 桌面客户端每个版本改进了什么。" property="og:description"/><meta content="https://client-api.leyra.xin/docs/changelog" property="og:url"/><meta content="https://client-api.leyra.xin/assets/leyra-orange-104.jpeg" property="og:image"/><meta content="summary" name="twitter:card"/><style>
+:root{--ink:#101A19;--sub:#33413D;--mute:#6B7772;--line:#DDE3E0;--bg:#F3F5F4;--brand:#0B6B5C;--tint:#DCEFEA}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font-family:'IBM Plex Sans','Microsoft YaHei','PingFang SC',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75}
+a{color:var(--brand)}
+header{position:sticky;top:0;z-index:5;background:rgba(243,245,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .in{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--ink);text-decoration:none}
+nav{display:flex;gap:22px;align-items:center;font-size:14.5px}
+nav a{color:var(--sub);text-decoration:none}
+nav a:hover,nav a.on{color:var(--brand)}
+nav a.on{font-weight:600}
+nav .btn{color:#fff;padding:8px 16px;font-size:14px}
+.btn{display:inline-block;border-radius:12px;background:var(--brand);color:#fff;font-weight:600;text-decoration:none}
+.btn:hover{background:#08493F;color:#fff}
+.layout{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:280px minmax(0,1fr) 230px;gap:0;align-items:start}
+.side{position:sticky;top:60px;max-height:calc(100vh - 60px);overflow-y:auto;padding:24px 14px 40px 20px;border-right:1px solid var(--line);font-size:14.5px}
+.side details{margin:0}
+.side summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;font-weight:600;color:var(--ink)}
+.side summary::-webkit-details-marker{display:none}
+.side summary::before{content:"";width:6px;height:6px;border-right:1.6px solid var(--mute);border-bottom:1.6px solid var(--mute);transform:rotate(45deg);margin:0 4px 3px 2px;flex:none;transition:transform .15s}
+.side details:not([open])>summary::before{transform:rotate(-45deg);margin-bottom:0}
+.side .sub>summary{font-weight:500;color:var(--mute);font-size:14px}
+.side .kids{margin-left:12px;padding-left:8px;border-left:1px solid var(--line)}
+.side a{display:block;padding:7px 12px;border-radius:8px;color:var(--sub);text-decoration:none;line-height:1.5}
+.side a:hover{background:#E9EFEC}
+.side a.cur{background:#fff;color:var(--brand);font-weight:600;box-shadow:0 1px 0 var(--line)}
+.main{padding:32px 48px 72px;min-width:0}
+.crumb{font-size:13.5px;color:var(--mute);margin-bottom:18px}
+.crumb a{color:var(--mute);text-decoration:none}
+.crumb a:hover{color:var(--brand)}
+.crumb i{font-style:normal;margin:0 6px}
+.doc{max-width:780px}
+.doc h1{margin:0 0 6px;font-size:34px;line-height:1.3;letter-spacing:-.3px}
+.meta{margin:0 0 28px;font-size:13px;color:var(--mute)}
+.doc h2{margin:44px 0 12px;font-size:26px;line-height:1.35}
+.doc h3{margin:32px 0 10px;font-size:20px}
+.doc h4,.doc h5{margin:22px 0 8px;font-size:16.5px}
+.doc p,.doc li{font-size:16px;color:#26332F}
+.doc p{margin:0 0 16px}
+.doc ul,.doc ol{margin:0 0 16px;padding-left:24px}
+.doc li{margin-bottom:5px}
+.doc img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--line)}
+.doc blockquote{margin:0 0 18px;padding:6px 18px;border-left:4px solid #D9822B;background:#F7F1E8;border-radius:0 10px 10px 0}
+.doc blockquote p{margin:8px 0;color:#4F4636}
+.doc hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+code{font-family:'IBM Plex Mono',Consolas,monospace;font-size:.9em;background:#E8EEEB;border-radius:6px;padding:1px 6px}
+pre{margin:0 0 18px;padding:14px 16px;background:#0F1A18;color:#E6F2EE;border-radius:12px;overflow-x:auto;line-height:1.6}
+pre code{background:none;padding:0;color:inherit;font-size:13.5px}
+.pn{display:flex;justify-content:space-between;gap:16px;margin-top:48px;padding-top:22px;border-top:1px solid var(--line)}
+.pn a{display:block;max-width:48%;padding:12px 16px;border:1px solid var(--line);background:#fff;border-radius:12px;text-decoration:none;color:var(--ink)}
+.pn a:hover{border-color:var(--brand)}
+.pn small{display:block;color:var(--mute);font-size:12.5px}
+.pn .next{margin-left:auto;text-align:right}
+.toc{position:sticky;top:60px;padding:28px 16px 40px 8px;font-size:13.5px;max-height:calc(100vh - 60px);overflow-y:auto}
+.toc b{display:block;margin-bottom:10px;color:var(--mute);font-weight:500}
+.toc div{border-left:2px solid var(--line)}
+.toc a{display:block;padding:4px 12px;color:var(--sub);text-decoration:none;line-height:1.5}
+.toc a:hover{color:var(--brand)}
+.toc a.l3{padding-left:28px;color:var(--mute)}
+h1.t{margin:0 0 8px;font-size:34px;line-height:1.3}
+.lead{margin:0 0 30px;color:var(--sub)}
+h2.cat{margin:30px 0 14px;font-size:15px;color:var(--mute);font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;text-decoration:none;color:inherit}
+.card:hover{border-color:var(--brand);box-shadow:0 12px 28px -20px var(--brand)}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0;font-size:14px;color:var(--sub)}
+.empty{background:#fff;border:1px solid var(--line);border-radius:16px;padding:40px 20px;text-align:center;color:var(--sub)}
+footer{border-top:1px solid var(--line);padding:30px 0;font-size:13px;color:var(--mute)}
+footer .in{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--mute);margin-right:18px}
+footer p{margin:0}
+@media(max-width:1180px){.layout{grid-template-columns:260px minmax(0,1fr)}.toc{display:none}}
+@media(max-width:820px){
+ .layout{display:block}
+ .side{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding:12px 16px}
+ .main{padding:24px 20px 56px}
+ .doc h1,h1.t{font-size:27px}
+ .doc h2{font-size:22px}
+ nav a:not(.btn):not(.on){display:none}
+ .pn{flex-direction:column}.pn a{max-width:100%}.pn .next{margin-left:0}
+}
+</style><style>@font-face{font-family:MiSans;src:url('../../assets/misans.woff2') format('woff2');font-display:swap}body{font-family:MiSans,system-ui,sans-serif}.rv{opacity:1!important;transform:none!important;visibility:visible!important}.btn,button,.leyra-action{background:#ae390e!important;border-color:#ae390e!important;color:#fff!important;text-decoration:none!important}.btn:hover,button:hover,.leyra-action:hover{background:#922b07!important}.leyra-action{display:inline-block;border:0;border-radius:8px;padding:11px 17px;font:inherit;cursor:pointer}.leyra-platform{margin:18px 0;background:#fff0e5;color:#713010;padding:12px 16px;border-radius:8px}</style><script defer="True" src="../../assets/site.js"></script><link href="../../assets/leyra-orange-104.jpeg" rel="icon" type="image/jpeg"/><style>
+.brand .leyra-brand-logo { display:block; width:36px; height:36px; flex:none; object-fit:cover; border-radius:8px; border:0; box-shadow:none; }
+.brand { display:inline-flex; align-items:center; gap:9px; }
+.leyra-action:focus-visible,.btn:focus-visible,button:focus-visible {outline:3px solid #963105;outline-offset:3px}
+</style></head>
+<body><header><div class="in"><a class="brand" href="../../"><img alt="" class="leyra-brand-logo" height="36" src="../../assets/leyra-orange-104.jpeg" width="36"/>Leyra</a><nav><a href="../../#features">功能</a><a href="../../#how">使用方法</a><a href="../../#pricing">价格</a><a href="../../#faq">常见问题</a><a class="on" href="../">文档库</a><a class="btn" href="../../#get">下载客户端</a></nav></div></header>
+<div class="layout"><aside aria-label="文档目录" class="side"><a href="../">全部文档</a><a aria-current="page" class="cur" href="./">更新日志</a><a href="../desktop-quick-start/">快速上手:安装、登录、连接</a><a href="../buy-static-ip/">独享 · 静态 ISP 代理 IP 怎么买</a><a href="../desktop-modes/">虚拟网卡模式和本地代理模式</a><a href="../desktop-coverage/">哪些流量能管住,哪些管不住</a><a href="../desktop-security-software/">安全软件弹窗和拦截怎么办</a><a href="../desktop-checks/">八项检测是什么、异常怎么处理</a><a href="../desktop-faq/">桌面客户端常见问题</a><details open=""><summary>AI 使用指南</summary><div class="kids"><details class="sub" open=""><summary>入门导读</summary><div class="kids"><a href="../getting-started/">新手路线:从安装到稳定使用</a><a href="../three-factors/">稳定使用 AI 的三个要素:网络、设备、使用习惯</a></div></details><details class="sub" open=""><summary>网络配置</summary><div class="kids"><a href="../shadowrocket-setup/">iPhone:Shadowrocket 配置指南</a><a href="../network-faq/">网络常见问题</a><a href="../choose-front-node/">前置节点怎么选</a></div></details></div></details></aside><div class="main"><div class="crumb"><a href="../">文档库</a><i>›</i><span>更新日志</span></div><article class="doc"><h1>更新日志</h1><p class="meta">桌面客户端每个版本改进了什么。客户端会自动更新，也可以点左下角版本号旁的图标手动检查。</p><h2 id="v1.0.0">v1.0.0<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-15</small></h2><ul><li>界面全部重做，你的登录、独享 IP、节点和设置都保留，不用重新填</li><li>更稳：换服务商、换地区、改分流、自动更新、开机时，Claude 都只走你的独享 IP</li><li>连接有问题时 Claude 先拦着，首页写明原因，要不要放开由你决定</li><li>更好懂：首页一眼看状态，有问题会告诉你是哪里、该点哪个按钮；第一次使用有新手三步</li><li>节点页改版，能看到到独享 IP 的延迟；侧栏显示会员和到期日，可以设置昵称和头像；窗口更大，可以调字号</li><li>客服在客户端里直接聊，可以发截图和检测报告；新增通知公告和更新日志</li><li>终身 VIP：一次付款，最多 5 台设备（电脑和手机都算），已开通的用户自动从 3 台升到 5 台</li></ul><h2 id="v0.1.40">v0.1.40<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-12</small></h2><ul><li>修复部分云电脑连接后断网的问题</li></ul><h2 id="v0.1.39">v0.1.39<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-12</small></h2><ul><li>云电脑上的一项检测改为只提醒，不影响使用</li></ul><h2 id="v0.1.38">v0.1.38<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-12</small></h2><ul><li>修复部分云电脑连接后 Claude 一直被拦的问题</li><li>独享 IP 暂时不通时，国内应用照常上网</li><li>连接异常时，电脑上网恢复更可靠</li><li>客服窗口可以一键发送检测报告，也能存成文件</li></ul><h2 id="v0.1.37">v0.1.37<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-11</small></h2><ul><li>换服务商、换地区、改分流时更稳，Claude 始终走你的独享 IP</li><li>切换后连不上时首页写明原因</li><li>和其他代理软件冲突时会提醒你</li></ul><h2 id="v0.1.36">v0.1.36<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-11</small></h2><ul><li>断开后网络恢复更可靠，换 Wi-Fi 也正常</li><li>减少检测误报</li><li>更多 Claude 相关页面走你的独享 IP</li></ul><h2 id="v0.1.35">v0.1.35<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-10</small></h2><ul><li>修复部分独享 IP 一直显示「出口未确认」的问题</li><li>检测报告更完整，客服排查更快</li></ul><h2 id="v0.1.33">v0.1.33<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-05</small></h2><ul><li>别的软件反复改网卡 DNS 时，Claude 不再一会儿能用一会儿被拦：客户端自动改回并给黄色提醒，能认出来的会写明可能是哪个软件；真的查到泄露才拦截</li><li>订阅拉不到时说清原因（比如返回 504、链接打开不是节点列表），也会经电脑上开着的代理工具再拉一次；服务商的提示条目不再被当成节点</li><li>Claude Code 检测更准：客户端没连接时直接告诉你，连上后自动恢复；本地端口出问题时会自动重新打开</li><li>用自己的工具时更省心：选中的 v2rayN 不再被报成代理冲突，诊断写明经哪个工具连接；工具里已经接了独享 IP 时会提醒你去掉重复的一段</li><li>客服聊天可以发表情和文件，输入区和微信一样；图片偶尔加载失败会自动重试</li><li>没有管理员权限时可以一键以管理员身份重启；连接列表把客户端自己的检测标成「自检」，不再混在 AI 网站里</li></ul><h2 id="v0.1.31">v0.1.31<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-04</small></h2><ul><li>客服聊天窗口改成微信样式：客服回复时响提示音并自动弹出；可以引用消息，图片点一下放大；显示已读和未读</li><li>检测报告不再自动带上，要发时点「附上检测报告」，或在「网络」页点「发给客服」</li><li>节点断线时说清楚是哪一段连不上，恢复后几秒内变回正常；减少 DNS 防泄露的误报和误拦</li><li>用自己的工具时，诊断不再误报「订阅里没有节点」；订阅可以关掉自动更新，只在点「刷新订阅」时才拉，拉不到继续用上次的节点</li></ul><h2 id="v0.1.30">v0.1.30<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-04</small></h2><ul><li>客服窗口改成右下角的聊天窗：打开就是对话，回车就发，可以贴截图，不用留邮箱；第一条消息会自动附上检测报告（已隐藏订阅和密码）</li></ul><h2 id="v0.1.29">v0.1.29<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-04</small></h2><ul><li>新增在线客服：点「联系客服」直接发消息，可以贴截图、附上检测报告（已脱敏），客服回复有红点和通知；没登录也能用。微信客服已停用</li><li>独享 IP 偶尔超时不再拦很久：发现没测通马上重测，通了立刻恢复；复查时首页显示「正在复查线路」，首页和底部的检测状态也保持一致</li><li>Google 登录改成和其他 Google 网站走同一条线，减少 Google 要求验证的情况</li><li>DNS 防泄露也接管网卡上的 IPv6 DNS，修复部分加速器软件造成的 DNS 泄露提示</li></ul><h2 id="v0.1.28">v0.1.28<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-03</small></h2><ul><li>首次设置更稳：电脑上开着 Clash Verge 才默认推荐「用它」，否则默认导入订阅，「用我自己的工具」仍然可以选</li><li>出口核对更准：重新连接后不会再把上一次连接的检测结果套到新连接上；出口不对时会写明是哪种情况，方便排查</li><li>首页和底部的检测状态保持一致：被「Claude 看到的 IP」拦住时，底部那一项也显示异常</li><li>用自己的工具时连接更快，不再多等订阅</li></ul><h2 id="v0.1.27">v0.1.27<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-02</small></h2><ul><li>修复「用我自己的工具」时，你工具里的 REALITY 节点会连不上（握手失败）的问题</li><li>「用我自己的工具」：自动选的工具连不通独享 IP 时，会换电脑上另一个工具再试；你的工具一直把系统代理改回去时，客户端会提示你去关掉它的「系统代理」，不再互相抢；选中的工具不再被报成「代理冲突」</li><li>修复游戏加速器、VPN 等虚拟网卡上的 DNS 让「DNS 防泄露」一直报泄露的问题；报泄露时会写明是哪块网卡</li><li>修复「断网保护」在流量其实走着虚拟网卡时误报异常的问题，异常时会写明路由的跃点数和怎么改</li></ul><h2 id="v0.1.26">v0.1.26<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-02</small></h2><ul><li>不用再复制订阅了：节点可以直接用你电脑上开着的 Clash Verge、v2rayN 等，客户端自动找到它的端口，点「用它」就行；导入订阅照旧保留（节点页可以切换）</li><li>你的工具没在运行时，首页会直接告诉你「Claude 已拦截」，打开它就自动恢复；它换了端口也会自动跟上</li><li>修复国内部分网络「DNS 防泄露」一直检测不出来、Claude 一直被拦的问题</li><li>修复自带 IP 的用户「还不知道独享 IP 所在国家」一直过不了 DNS 检测的问题</li><li>本地代理模式下客户端会接管系统代理，浏览器不再绕过客户端走别的代理软件</li><li>修复「添加手机 → 安卓 → 生成安卓配置」报错的问题</li><li>自动更新安装的那几十秒里会先拦住 Claude，不让它走别的线路</li></ul><h2 id="v0.1.25">v0.1.25<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-11-01</small></h2><ul><li>接管方式可以选了：默认「虚拟网卡」管整台电脑；有软件和虚拟网卡冲突时，可以在软件设置里改成「系统代理」，断开时自动恢复原来的代理设置</li><li>没有管理员权限时，客户端会自动把系统代理设好，浏览器直接就能走独享 IP</li></ul><h2 id="v0.1.24">v0.1.24<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-10-31</small></h2><ul><li>以后的新版会在你没用 Claude 的时候自动装好并重新连上，不用自己点安装</li><li>修复部分节点在这里大面积超时的问题；检测服务直连不通时会自动换路</li><li>填独享 IP 更省心：整行粘贴自动拆开，认出常见供应商的格式直接给填法，协议选错自动帮你改，连不上时说清是协议、账号还是白名单的问题</li><li>节点可以加星置顶、按延迟或名称排序；「分流测试」改名「分流规则」，加了 Grok 和 Meta AI，自己加的规则和内置规则重复时会提示</li></ul><h2 id="v0.1.23">v0.1.23<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-10-30</small></h2><ul><li>分流可以自己设了：Claude 固定走独享 IP，ChatGPT、Gemini、Grok、Meta AI 可以选走独享 IP 还是你的节点，还能自己加网站规则</li><li>节点可以按地区自动选最快，比如只在日本节点里挑延迟最低的</li><li>新增「产品共创」：想要什么功能直接提、给别人的需求投票，还能贴截图；客服和共创放在右下角，可以拖动、可以关闭</li><li>重新登录不用再选设备；分流测试打开就自动测；账号页可以注销账号</li></ul><h2 id="v0.1.22">v0.1.22<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-10-30</small></h2><ul><li>新增「连接」页：每条连接走哪条线一目了然，首页也会告诉你过去 1 小时 Claude 的连接是不是全部走独享 IP</li><li>新增「分流测试」：一键测 AI 网站、国外网站、国内网站三条线是不是都走对了</li><li>独享 IP 连不上时直接告诉你原因和怎么办，比如「这家节点服务商不肯转发到你的独享 IP」</li><li>新添加的节点服务商会自动试一次，连不通就换回原来那家；常见的 IP 检测网站也会显示你的独享 IP</li><li>首页的提示可以手动关掉；修复装了 Radmin VPN 等组网软件时被误判为其他 VPN、检测一直不通过的问题</li></ul><h2 id="v0.1.21">v0.1.21<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-10-29</small></h2><ul><li>浏览器开了「安全 DNS」时，DNS 查询也走你的独享 IP，官网检测和客户端的结果一致了</li></ul><h2 id="v0.1.20">v0.1.20<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-10-29</small></h2><ul><li>新用户可以免费试用 1 天，首页显示剩余时间，快到期时会提醒</li><li>新增终身 VIP：一次付款永久使用，电脑和手机都能用</li><li>检测结果的「一键修复」会直接带你去该去的页面</li><li>节点连不上独享 IP 时，换个节点就能自动恢复</li></ul><h2 id="v0.1.15">v0.1.15<small style="font-weight:400;color:#6B7772;margin-left:10px;font-size:14px">2026-10-28</small></h2><ul><li>新版本下载好后，首页会提示你，点一下重启就能安装</li></ul></article></div><aside class="toc"></aside></div>
+<footer><div class="in"><p>© 2026 Leyra</p><div><a href="../../privacy/">隐私政策</a><a href="../../terms/">服务条款</a></div></div></footer></body></html>
