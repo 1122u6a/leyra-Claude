@@ -1,0 +1,6 @@
+
+.leyra-exit-card{display:flex;flex-direction:column;gap:10px;margin:0 0 12px}
+.leyra-exit-card p{margin:0}
+.leyra-exit-actions,.leyra-exit-confirm{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.leyra-exit-card .v1-row{flex-wrap:wrap;gap:10px}
+.v1-hours i.pending,.v1-hours-legend i.pending{background:#e8e0d6}

@@ -1,0 +1,9 @@
+{
+  "name": "leyra-windows",
+  "version": "1.1.8",
+  "private": true,
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test tests/guard.test.cjs tests/process-labels.test.cjs tests/timeline.test.cjs api-reference/api.test.mjs"
+  }
+}
